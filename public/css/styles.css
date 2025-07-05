@@ -4,3 +4,215 @@
 *:after {
   box-sizing: border-box;
 }
+:root{
+    --standard-blue: #003399;
+    --standard-green:#012f12;
+    --standard-black:black;
+    --standard-white:white;
+    --standard-red: red;
+
+
+    --X-larger-font: 2.5rem;
+    --larger-font: 2rem;
+    --large-font: 1.75rem;
+    --medium-font: 1.5rem;
+    --small-font: 1.25rem;
+    --smaller-font: 1rem; 
+    --tiny-smaller-font: 0.75rem;
+}
+/*Styling the header part*/
+.siteName a{
+  color: var(--standard-black);
+  text-decoration: none;
+  font-size: var(--X-larger-font)
+}
+
+#tools a{
+  color: var(--standard-black);
+  text-decoration: none;
+  font: var(--medium-font);
+}
+
+#vehicleMainImg{
+  position: relative;
+  width: 500px;
+  margin: 0 auto;
+  padding-bottom: 50px;
+}
+
+.overlay-box{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 0px;
+  padding-bottom: 15px;
+  width: 130px;
+  background-color: rgba(0, 0, 0, 0.6); /* Transparência */
+  color: #fff;
+  border-radius: 10px;
+  backdrop-filter: blur(3px); /* opcional para suavizar visual */
+}
+
+.callForAction{
+  width:80%;
+}
+#productNameCall{
+  font-size: var(--small-font);
+  color: var(--standard-white);
+}
+.callMessage{
+  font-size: var(--smaller-font);
+  color: var(--standard-white);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+.card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 400px;
+}
+
+.card h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.grid-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  
+}
+
+.image-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100px;
+  
+}
+.image-box img {
+  height: 50px;
+  border-radius: 6px;
+  
+}
+.image-box a {
+  display: block;
+  margin-top: 8px;
+  color: var(--standard-black);
+  text-decoration: none;
+  background-color: var(--standard-white);
+}
+
+.image-box a:hover {
+  text-decoration: underline;
+}
+
+.image-inner-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 70px;
+  background-color: var(--standard-blue);
+}
+
+.list {
+  margin-top: 20px;
+  padding-left: 20px;
+}
+.list li{
+  margin-bottom: 10px;
+}
+nav {
+  display: flex;
+  flex-direction: row;
+  background-color: var(--standard-black);
+}
+/*Styling the nav*/
+nav {
+  display: flex;
+  flex-direction: row;
+  background-color: var(--standard-black);
+}
+nav ul{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-evenly;
+}
+nav ul li{
+  list-style-type: none;
+  color:var(--standard-white);
+}
+/* adjust the top header horizontally*/
+#top-header{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+#wrapper{
+  margin: 0 auto;
+  width: 800px;
+  background-color: var(--standard-white);
+  border: solid 3px var(--standard-blue);
+  border-radius: 10px;
+  padding: 10px;
+}
+body{
+    background-image: url("../images/site/checkerboard.jpg");
+}
+@media (max-width: 810px){
+  
+  /* Styling the body*/
+  #wrapper{
+    width: 100%;
+  }
+  
+}
+@media (max-width:490px){
+  /* Styling the body*/
+  .card{
+    width: 290px;
+  }
+  #vehicleMainImg {
+    width: 100%; /* 🔄 faz com que a div ocupe o espaço disponível */
+  }
+  #innerMainImg {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  .container{
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  #productNameCall{
+    font-size: var(--smaller-font);
+  }
+  .callMessage{
+    font-size: var(--tiny-smaller-font);
+  }
+  .callForAction{
+    width: 85px;
+  }
+  .overlay-box{
+    padding-bottom: 10px;
+    width: 100px;
+  }
+}
