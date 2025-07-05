@@ -89,7 +89,6 @@
 .card h2 {
   margin-top: 0;
   margin-bottom: 20px;
-  font-size: 24px;
   color: #333;
 }
 
@@ -193,8 +192,17 @@ h1,h2,h3{
   
 }
 @media (max-width:490px){
+  h1{
+    font-size: var(--medium-font);
+  }
+  h2{
+    font-size: var(--small-font);
+  }
   #wrapper{
     border:none;
+  }
+  .siteName a{
+    font-size: var(--large-font);
   }
   .card{
     width: 290px;
