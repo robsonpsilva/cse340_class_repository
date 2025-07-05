@@ -18,6 +18,7 @@
     --medium-font: 1.5rem;
     --small-font: 1.25rem;
     --smaller-font: 1rem; 
+    --m-smaller-font: 0.85;
     --tiny-smaller-font: 0.75rem;
 }
 /*Styling the header part*/
@@ -47,11 +48,11 @@
   align-items: center;
   top: 0px;
   padding-bottom: 15px;
-  width: 130px;
-  background-color: rgba(0, 0, 0, 0.6); /* Transparência */
+  width: 135px;
+  background-color: rgba(0, 0, 0, 0.6);
   color: #fff;
   border-radius: 10px;
-  backdrop-filter: blur(3px); /* opcional para suavizar visual */
+  backdrop-filter: blur(3px); 
 }
 
 .callForAction{
@@ -156,7 +157,7 @@ nav ul li{
   list-style-type: none;
   color:var(--standard-white);
 }
-/* adjust the top header horizontally*/
+/* Adjust the top header horizontally*/
 #top-header{
   display: flex;
   flex-direction: row;
@@ -177,20 +178,20 @@ body{
     background-image: url("../images/site/checkerboard.jpg");
 }
 @media (max-width: 810px){
-  
-  /* Styling the body*/
   #wrapper{
     width: 100%;
   }
   
 }
 @media (max-width:490px){
-  /* Styling the body*/
+  #wrapper{
+    border:none;
+  }
   .card{
     width: 290px;
   }
   #vehicleMainImg {
-    width: 100%; /* 🔄 faz com que a div ocupe o espaço disponível */
+    width: 100%; /* 🔄 Makes the div take up the available space */
   }
   #innerMainImg {
     width: 100%;
@@ -213,6 +214,11 @@ body{
   }
   .overlay-box{
     padding-bottom: 10px;
-    width: 100px;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 110px;
+  }
+  body{
+    background-image:none;
   }
 }
