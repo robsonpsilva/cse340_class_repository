@@ -20,6 +20,9 @@
     --smaller-font: 1rem; 
     --m-smaller-font: 0.85;
     --tiny-smaller-font: 0.75rem;
+
+    --font-body: 'Open Sans', sans-serif; 
+    --font-heading: "Poppins", Arial, Helvetica, sans-serif;
 }
 /*Styling the header part*/
 .siteName a{
@@ -139,19 +142,16 @@
 nav {
   display: flex;
   flex-direction: row;
+
   background-color: var(--standard-black);
 }
-/*Styling the nav*/
-nav {
-  display: flex;
-  flex-direction: row;
-  background-color: var(--standard-black);
-}
+
 nav ul{
   display: flex;
   flex-direction: row;
-  width: 100%;
   justify-content: space-evenly;
+  width: 100%;
+  padding-left: 0;
 }
 nav ul li{
   list-style-type: none;
@@ -176,7 +176,13 @@ nav ul li{
 }
 body{
     background-image: url("../images/site/checkerboard.jpg");
+    font-family: var(--font-body);
 }
+
+h1,h2,h3{
+  font-family: var(--font-heading);
+}
+
 @media (max-width: 810px){
   #wrapper{
     width: 100%;
