@@ -196,9 +196,7 @@ VALUES   (
     5
   );
 
-UPDATE inventory 
-SET inv_description = 'Do you have 6 kids and like to go offroading? The Hummer gives you the huge interiors with an engine to get you out of any muddy or rocky situation.'
-WHERE inv_id = 10;
+
 
 UPDATE inventory 
 SET inv_image = REPLACE(inv_image,'/images','/images/vehicles' ),

@@ -241,10 +241,13 @@ VALUES   (
     5
   );
 
+--Updating only part of the data present in a text field using the REPLACE function.
 UPDATE inventory 
-SET inv_description = 'Do you have 6 kids and like to go offroading? The Hummer gives you the huge interiors with an engine to get you out of any muddy or rocky situation.'
+SET inv_description = Replace(inv_description, 'small interiors', 'huge interior')
 WHERE inv_id = 10;
 
+--Updating all records in the inventory table to add "/vehicles" to the middle of the file
+--path in the inv_image and inv_thumbnail columns using a single query.
 UPDATE inventory 
 SET inv_image = REPLACE(inv_image,'/images','/images/vehicles' ),
 inv_thumbnail = REPLACE(inv_thumbnail,'/images','/images/vehicles' );
