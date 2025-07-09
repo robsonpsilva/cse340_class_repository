@@ -9,7 +9,7 @@ UPDATE account SET account_type = 'Admin' WHERE account_id = 1;
 -- Delete the account
 DELETE FROM account WHERE account_id = 1;
 
---Updating only part of the data present in a text field using the REPLACE function.
+--Updating only part of the data present in the description field using the REPLACE function.
 UPDATE inventory 
 SET inv_description = Replace(inv_description, 'small interiors', 'huge interior')
 WHERE inv_id = 10;
