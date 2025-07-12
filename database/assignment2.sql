@@ -6,7 +6,7 @@ VALUES('Tony', 'Stark', 'tony@starkent.com', 'Iam1ronM@n');
 -- Tony Stark update - changing the account type from Client to Admin
 UPDATE account SET account_type = 'Admin' WHERE account_id = 1;
 
--- Delete the account
+-- Delete the Tony Stark account
 DELETE FROM account WHERE account_id = 1;
 
 --Updating only part of the data present in the description field using the REPLACE function.
@@ -17,7 +17,7 @@ WHERE inv_id = 10;
 --Using an inner join to select the make and model fields from the inventory table and the 
 --classification name field from the classification table for inventory items that belong
 -- to the "Sport" category.
-SELECT classification.classification_name, inventory.inv_model
+SELECT inventory.inv_make, inventory.inv_model, classification.classification_name
 FROM inventory
 INNER JOIN classification
 ON inventory.classification_id = classification.classification_id
