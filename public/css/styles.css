@@ -37,6 +37,11 @@
   font: var(--medium-font);
 }
 
+.menu{
+  color: white;
+  text-decoration: none;
+}
+
 #vehicleMainImg{
   position: relative;
   width: 500px;
@@ -73,6 +78,16 @@
   color: var(--standard-white);
 }
 
+#inv-display {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-evenly;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 0;
+  list-style: none;
+}
+
 .container {
   display: flex;
   justify-content: center;
@@ -90,6 +105,41 @@
   margin-top: 0;
   margin-bottom: 20px;
   color: #333;
+}
+
+.invcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 16px;
+  width: 214px; /* 3 cards por linha com gap */
+  box-sizing: border-box;
+  transition: transform 0.2s ease-in-out;
+}
+
+.invcard:hover {
+  transform: scale(1.05);
+}
+
+.namePrice{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 220px;
+}
+.namePrice h2{
+  text-align: center;
+  font-size: var(--small-font);
+}
+.namePrice hr{
+  height: 4px;
+  width: 100%;
+  color: var(--standard-black);
+  border: none;
+  border-top: 8px double #555;
 }
 
 .grid-images {
@@ -189,6 +239,7 @@ h1,h2,h3{
   #wrapper{
     width: 100%;
   }
+
   
 }
 @media (max-width:490px){
@@ -215,6 +266,10 @@ h1,h2,h3{
     height: auto;
     display: block;
     margin: 0 auto;
+  }
+  #inv-display{
+    flex-direction: column;
+    align-items: center;
   }
   .container{
     flex-direction: column-reverse;

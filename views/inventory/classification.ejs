@@ -1,0 +1,10 @@
+<!-- Creating the content heading -->
+ <% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+<!-- The next code shows a message on the screen -->
+ <%# messages() %>
+<!-- Here we are showing the view main content -->
+ <%- grid %>
