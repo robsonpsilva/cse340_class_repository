@@ -226,6 +226,94 @@ nav ul li{
   border-radius: 10px;
   padding: 10px;
 }
+/* Left panel for the image */
+.left-panel-image {
+    
+    flex-shrink: 0; /* Prevents image panel from shrinking */
+    padding-right: 20px; /* Small spacing between image and text content */
+}
+
+.car-image {
+    max-width: 400px; /* Ensures image is responsive within its container */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Removes extra space below image */
+    border-radius: 8px; /* Rounded corners for the image */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Shadow for the image */
+}
+
+/* Right panel for the details/text content */
+.right-panel-details {
+    flex: 1; /* Allows this panel to grow and take available space */
+    display: flex; /* Use flexbox for internal layout of this panel */
+    flex-direction: column; /* Stack children vertically */
+}
+
+.right-panel-details .title {
+    margin-top: 0; /* Remove default top margin for consistency */
+    margin-bottom: 15px; /* Space below the title */
+    color: #333;
+}
+
+/* Styling for detail rows (price, description, color, miles) */
+.detail-row {
+    padding: 10px 15px; /* Internal padding for each row */
+    margin-bottom: 8px; /* Space between rows */
+    border-radius: 4px; /* Slightly rounded corners for rows */
+    width: 100%; /* Occupy full width of the right panel */
+    box-sizing: border-box; /* Include padding in the width */
+}
+
+.detail-row .label {
+    font-weight: bold;
+    margin-right: 5px; /* Space between label and value */
+    color: #555;
+}
+
+.detail-row .value {
+    color: #333;
+}
+
+/* Specific row styles */
+.price-row {
+    background-color: #f0f0f0; /* Light gray background for price */
+    font-size: 1.2em; /* Slightly larger font for price */
+    font-weight: bold;
+}
+
+.description-row {
+    background-color: #ffffff; /* White background for description */
+    border: 1px solid #eee; /* Light border */
+}
+
+.description-row .description-text {
+    margin: 0; /* Remove default paragraph margin */
+    line-height: 1.5; /* Improve readability */
+    color: #444;
+}
+
+.color-row {
+    background-color: #f0f0f0; /* Dark background for color */
+    color: #fff; /* White text for color */
+    font-weight: bold;
+}
+
+.miles-row {
+    background-color: #ffffff; /* White background for miles */
+    border: 1px solid #eee; /* Light border */
+}
+/* Main container using Flexbox */
+.car-details-container{
+    display: flex; /* Enables flexbox layout */
+    justify-content: space-between; /* Pushes items to opposite ends */
+    align-items: flex-start; /* Aligns items to the top */
+    padding: 20px; /* Overall padding around the content */
+    max-width: 1200px; /* Max width for the content area */
+    margin: 20px auto; /* Center the container on the page */
+    background-color: #fff; /* White background for the main content area */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 8px; /* Slightly rounded corners */
+}
+
 body{
     background-image: url("../images/site/checkerboard.jpg");
     font-family: var(--font-body);
@@ -239,7 +327,28 @@ h1,h2,h3{
   #wrapper{
     width: 100%;
   }
+  .car-image {
+    max-width: 100%; /* Ensures image is responsive within its container */
+  }
+  .car-details-container {
+      flex-direction: column; /* Empilha os painéis verticalmente */
+      align-items: center; /* Centraliza os itens quando empilhados */
+      padding: 10px; /* Reduz o padding geral em telas menores */
+  }
 
+  .left-panel-image {
+      padding-right: 0; /* Remove o padding lateral quando empilhado */
+      margin-bottom: 20px; /* Adiciona espaço abaixo da imagem */
+  }
+
+  .right-panel-details {
+      width: 100%; /* Faz o painel de detalhes ocupar toda a largura disponível */
+      padding: 0 10px; /* Adiciona um pequeno padding lateral ao conteúdo do texto */
+  }
+
+  .detail-row {
+      padding: 8px 10px; /* Ajusta o padding das linhas de detalhes */
+  }
   
 }
 @media (max-width:490px){
@@ -286,6 +395,14 @@ h1,h2,h3{
   }
   .overlay-box{
     width: 110px;
+  }
+  .title {
+      font-size: 1.5em; /* Reduz o tamanho do título */
+  }
+
+  .detail-row .value,
+  .detail-row .label {
+      font-size: 0.9em; /* Reduz o tamanho da fonte dos detalhes */
   }
   body{
     background-image:none;
