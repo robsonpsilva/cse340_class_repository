@@ -73,7 +73,7 @@ Util.buildCarDetailScreen = async function(car) {
             
             <div class="detail-row price-row">
                 <span class="label">Price:</span> 
-                <span class="value">$ ${car.inv_price}</span>
+                <span>$${car.inv_price}</span>
             </div>
             
             <div class="detail-row description-row">

@@ -263,21 +263,22 @@ nav ul li{
     box-sizing: border-box; /* Include padding in the width */
 }
 
-.detail-row .label {
-    font-weight: bold;
+.label {
+    font-weight: bolder;
     margin-right: 5px; /* Space between label and value */
-    color: #555;
+    color: var(--standard-blue);
+  
 }
 
 .detail-row .value {
-    color: #333;
+    color: var(--standard-black);
 }
 
 /* Specific row styles */
 .price-row {
-    background-color: #f0f0f0; /* Light gray background for price */
+    background-color: #f5f3f3; /* Light gray background for price */
     font-size: 1.2em; /* Slightly larger font for price */
-    font-weight: bold;
+    font-weight: bolder;
 }
 
 .description-row {
@@ -288,13 +289,13 @@ nav ul li{
 .description-row .description-text {
     margin: 0; /* Remove default paragraph margin */
     line-height: 1.5; /* Improve readability */
-    color: #444;
+    color: var(--standard-black);
+    font-weight: 100;
 }
 
 .color-row {
-    background-color: #f0f0f0; /* Dark background for color */
+    background-color: #f5f3f3; /* Dark background for color */
     color: #fff; /* White text for color */
-    font-weight: bold;
 }
 
 .miles-row {
