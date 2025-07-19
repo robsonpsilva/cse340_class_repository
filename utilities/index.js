@@ -73,7 +73,7 @@ Util.buildCarDetailScreen = async function(car) {
             
             <div class="detail-row price-row">
                 <span class="label">Price:</span> 
-                <span>$${car.inv_price}</span>
+                <span>$${Number(car.inv_price).toLocaleString()}</span>
             </div>
             
             <div class="detail-row description-row">
@@ -90,7 +90,7 @@ Util.buildCarDetailScreen = async function(car) {
             
             <div class="detail-row miles-row">
                 <span class="label">Miles:</span> 
-                <span class="value">${car.inv_miles}</span>
+                <span class="value">${Number(car.inv_miles).toLocaleString()}</span>
             </div>
         </section>
       </div>`
