@@ -315,6 +315,81 @@ nav ul li{
     border-radius: 8px; /* Slightly rounded corners */
 }
 
+.external{
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form-container {
+  background-color: white;
+  padding: 20px 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.08);
+  width: 300px;
+  border: 1px solid #ccc;
+}
+.login-form{
+  background-color: #0056b3;
+  padding: 10px;
+}
+.login-form h2 {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.login-form label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #aaa;
+}
+
+.password-instructions {
+  font-size: 0.75em;
+  color: white;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.login-form button:hover {
+  background-color: #0056b3;
+}
+
+.signup-message {
+  margin-top: 20px;
+  text-align: center;
+  color: var(--standard-black);
+}
+
+.signup-message a {
+  color: var(--standard-black);
+  font-weight: bold;
+}
+
+.signup-message a:hover {
+  text-decoration: underline;
+}
+
 body{
     background-image: url("../images/site/checkerboard.jpg");
     font-family: var(--font-body);

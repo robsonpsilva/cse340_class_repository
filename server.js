@@ -35,6 +35,13 @@ app.set("layout", "./layouts/layout") // not at views root
   name: 'sessionId',
 }))
 
+// Express Messages Middleware
+app.use(require('connect-flash')())
+app.use(function(req, res, next){
+  res.locals.messages = require('express-messages')(req, res)
+  next()
+})
+
 /* ***********************
  * Routes
  *************************/
@@ -45,6 +52,10 @@ app.get("/", baseController.buildHome)
 
 // Inventory routes
 app.use("/inv", inventoryRoute)
+
+//Account route
+app.use("/account", require("./routes/accountRoute"))
+
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
