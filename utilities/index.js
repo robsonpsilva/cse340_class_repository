@@ -105,6 +105,7 @@ Util.buildCarDetailScreen = async function(car) {
 * Build Login Form
 */
 Util.buildLoginScreen = async function() {
+  let grid
   grid = 
   `   <div class = "external">
         <div class="form-container">
@@ -126,13 +127,72 @@ Util.buildLoginScreen = async function() {
             </form>
 
             <div class="signup-message">
-              No Account? <a href="#">Sign up</a>
+              No Account? <a href="/account/register">Sign up</a>
             </div>
         </div>
       <div>
   `
   return grid
 } 
+
+/*
+  Build Registration Form
+*/
+
+Util.buildRegisterScreen = async function() {
+  let grid
+  grid = 
+  `   <div class = "external">
+        <div class="form-container">
+            <p> All fields are required"</p>
+            <form id="registrationForm" action ="/account/register" method = "post" class="login-form">
+              <label for="first_name">First Name:*</label>
+              <input type="text" id="account_firstname" placeholder="Enter your First Name" required>
+
+              <label for="last_name">Last Name:*</label>
+              <input type="text" id="account_lastname" placeholder="Enter your Last Name" required>
+
+              <label for="email">Email:*</label>
+              <input type="email" id="account_email" placeholder="Enter your email" required>
+
+              <label for="password">Password:*</label>
+              <input type="password" id="account_password" placeholder="Enter your password" required>
+
+              <small class="password-instructions">
+                Passwords must be a minimum of 12 characters and include 1 capital letter, 1 number, and 1 special character.
+              </small>
+
+              <button type="button" id="toggle-password">Show password</button>
+              <button type="submit">Register</button>
+            </form>
+        </div>
+      <div>
+  `
+  return grid
+  
+}
+
+/*
+* Handle Errors Midlleware
+*/
+
+Util.handleErrors = async function (controller) {
+  return async (req, res, next) => {
+    try {
+      await controller(req, res, next);
+    } catch (error) {
+      console.error("Erro capturado pelo middleware:", error);
+
+      // Lógica de tratamento de erro...
+      const statusCode = error.statusCode || 500;
+      const errorMessage = process.env.NODE_ENV === 'production'
+                           ? "Internal server error."
+                           : error.message;
+
+      res.status(statusCode).json({ message: errorMessage });
+    }
+  };
+}
 
 module.exports = Util
 
