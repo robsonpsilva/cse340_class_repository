@@ -146,17 +146,17 @@ Util.buildRegisterScreen = async function() {
         <div class="form-container">
             <p> All fields are required"</p>
             <form id="registrationForm" action ="/account/register" method = "post" class="login-form">
-              <label for="first_name">First Name:*</label>
-              <input type="text" id="account_firstname" placeholder="Enter your First Name" required>
+              <label for="account_firstname">First Name:*</label>
+              <input type="text" name ="account_firstname" id="account_firstname" placeholder="Enter your First Name" required>
 
-              <label for="last_name">Last Name:*</label>
-              <input type="text" id="account_lastname" placeholder="Enter your Last Name" required>
+              <label for="account_lastname">Last Name:*</label>
+              <input type="text" name = "account_lastname" id="account_lastname" placeholder="Enter your Last Name" required>
 
-              <label for="email">Email:*</label>
-              <input type="email" id="account_email" placeholder="Enter your email" required>
+              <label for="account_email">Email:*</label>
+              <input type="email" name ="account_email" id="account_email" placeholder="Enter your email" required>
 
-              <label for="password">Password:*</label>
-              <input type="password" id="account_password" placeholder="Enter your password" required>
+              <label for="account_password">Password:*</label>
+              <input type="password" name = "account_password" id="account_password" placeholder="Enter your password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
 
               <small class="password-instructions">
                 Passwords must be a minimum of 12 characters and include 1 capital letter, 1 number, and 1 special character.
@@ -172,27 +172,55 @@ Util.buildRegisterScreen = async function() {
   
 }
 
+Util.buildSuccessRegister = async function (account_firstname, account_lastname) {
+   grid = `
+    <div class = "external-success-container">
+      <div class="success-container">
+          <div class="success-card">
+              <svg class="success-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+              </svg>
+              <h1 class="success-title">Welcome, ${account_firstname} ${account_lastname}</h1>
+              <p class="success-message">Your account has been successfully created.</p>
+              <p class="success-message">You can now explore our platform.</p>
+              <a href="/" class="success-button">Go to Homepage</a>
+          </div>
+      </div>
+    </div>`
+    return grid
+}
+
 /*
 * Handle Errors Midlleware
 */
 
-Util.handleErrors = async function (controller) {
+Util.handleErrors = (controller) => {
+  // Retorna a função de middleware real que o Express vai usar
   return async (req, res, next) => {
     try {
+      // Tries to execute the controller function.
+      // We pass the same arguments (req, res, next) that Express would provide.
       await controller(req, res, next);
     } catch (error) {
-      console.error("Erro capturado pelo middleware:", error);
+      // If an error is thrown within the controller, it will be caught here.
+      console.error("Error caught by handleErrors middleware:", error);
 
-      // Lógica de tratamento de erro...
-      const statusCode = error.statusCode || 500;
-      const errorMessage = process.env.NODE_ENV === 'production'
-                           ? "Internal server error."
+      // Determine the appropriate status code and error message.
+      // Prioritize a 'statusCode' defined in the error itself (if you throw them with it).
+      
+      // In production, avoid exposing internal error details.
+      const errorMessage = process.env.NODE_ENV === 'production' 
+                           ? "An internal server error occurred." 
                            : error.message;
 
-      res.status(statusCode).json({ message: errorMessage });
+      // Sends a JSON error response to the client.
+      res.status(statusCode).json({
+        message: errorMessage,
+        stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      });
     }
   };
-}
+};
 
 module.exports = Util
 

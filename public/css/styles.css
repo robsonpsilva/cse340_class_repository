@@ -355,6 +355,44 @@ nav ul li{
   border: 1px solid #aaa;
 }
 
+input:required:invalid, input:focus:invalid{
+  border: 2px solid #e74c3c;
+  box-shadow: 0 0 5px rgba(231, 76, 60, 0.7);
+}
+
+input:required:valid {
+    border-color: #28a745; /* Borda verde para indicar sucesso */
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5); /* Sombra suave verde */
+    background-color: #e6ffe6; /* Fundo verde claro */
+}
+
+/* Opcional: Estilos para quando o campo está inválido (boa prática para feedback negativo) */
+input:required:invalid {
+    border-color: #dc3545; /* Borda vermelha para indicar erro */
+    box-shadow: 0 0 5px rgba(220, 53, 69, 0.5); /* Sombra suave vermelha */
+    background-color: #ffe6e6; /* Fundo vermelho claro */
+}
+
+/* Opcional: Remover o destaque azul padrão de foco em alguns navegadores, se desejar */
+input:focus {
+    outline: none; /* Remove o outline padrão */
+    border-color: #007bff; /* Ou a cor que você usa para foco */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra azul para foco */
+}
+
+/* Estilos básicos para inputs para que os estados valid/invalid se destaquem */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc; /* Borda padrão cinza */
+    border-radius: 5px;
+    box-sizing: border-box; /* Garante que padding e border não aumentem a largura total */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Transições suaves */
+}
+
 .password-instructions {
   font-size: 0.75em;
   color: white;
@@ -392,6 +430,96 @@ nav ul li{
   text-decoration: underline;
 }
 
+.success-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.success-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    text-align: center;
+    max-width: 500px; /* Max width for larger screens */
+    width: 100%; /* Take full width on smaller screens */
+    box-sizing: border-box;
+    animation: fadeIn 0.8s ease-out; /* Simple fade-in animation */
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    color: #28a745; /* Green color for success */
+    margin-bottom: 25px;
+}
+
+.success-title {
+    font-size: 2.5em;
+    color: #28a745;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.success-message {
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.success-button {
+    display: inline-block;
+    background-color: #007bff; /* Blue button */
+    color: #ffffff;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.success-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .success-card {
+        padding: 30px;
+    }
+
+    .success-title {
+        font-size: 2em;
+    }
+
+    .success-message {
+        font-size: 1em;
+    }
+
+    .success-icon {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 body{
     background-image: url("../images/site/checkerboard.jpg");
     font-family: var(--font-body);
@@ -402,6 +530,25 @@ h1,h2,h3{
 }
 
 @media (max-width: 810px){
+
+  .success-card {
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    .success-title {
+        font-size: 1.8em;
+    }
+
+    .success-message {
+        font-size: 0.95em;
+    }
+
+    .success-button {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+
   #wrapper{
     width: 100%;
   }
@@ -428,6 +575,15 @@ h1,h2,h3{
       padding: 8px 10px; /* Ajusta o padding das linhas de detalhes */
   }
   
+}
+.external-success-container{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+    margin: 0;
+    background-color: #f0f2f5; /* Light grey background */
+    color: #333;
 }
 @media (max-width:490px){
   h1{
