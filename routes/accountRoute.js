@@ -15,6 +15,8 @@ router.get("/login", accountController.buildLogin)
 // Process the login attempt
 router.post(
   "/login",
+  regValidate.loginRules(),
+  regValidate.checkRegData,
   (req, res) => {
     res.status(200).send('login process')
   }

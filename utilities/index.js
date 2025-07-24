@@ -104,36 +104,36 @@ Util.buildCarDetailScreen = async function(car) {
 /*
 * Build Login Form
 */
-Util.buildLoginScreen = async function() {
-  let grid
-  grid = 
-  `   <div class = "external">
-        <div class="form-container">
-            <form class="login-form">
-              <h2>Login</h2>
+// Util.buildLoginScreen = async function() {
+//   let grid
+//   grid = 
+//   `   <div class = "external">
+//         <div class="form-container">
+//             <form class="login-form">
+//               <h2>Login</h2>
 
-              <label for="email">Email:</label>
-              <input type="email" id="email" placeholder="Enter your email" required>
+//               <label for="email">Email:</label>
+//               <input type="email" id="email" placeholder="Enter your email" required>
 
-              <label for="password">Password:</label>
-              <input type="password" id="password" placeholder="Enter your password" required>
+//               <label for="password">Password:</label>
+//               <input type="password" id="password" placeholder="Enter your password" required>
 
-              <small class="password-instructions">
-                Passwords must be a minimum of 12 characters and include 1 capital letter, 1 number, and 1 special character.
-              </small>
+//               <small class="password-instructions">
+//                 Passwords must be a minimum of 12 characters and include 1 capital letter, 1 number, and 1 special character.
+//               </small>
 
-              <button type="button" id="toggle-password">Show password</button>
-              <button type="submit">Login</button>
-            </form>
+//               <button type="button" id="toggle-password">Show password</button>
+//               <button type="submit">Login</button>
+//             </form>
 
-            <div class="signup-message">
-              No Account? <a href="/account/register">Sign up</a>
-            </div>
-        </div>
-      <div>
-  `
-  return grid
-} 
+//             <div class="signup-message">
+//               No Account? <a href="/account/register">Sign up</a>
+//             </div>
+//         </div>
+//       <div>
+//   `
+//   return grid
+// } 
 
 /*
   Build Registration Form
