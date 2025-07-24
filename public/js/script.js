@@ -1,4 +1,4 @@
-const passwordInput = document.getElementById("password");
+const passwordInput = document.getElementById("account_password");
 const toggleBtn = document.getElementById("toggle-password");
 
 let visible = false;
