@@ -12,6 +12,14 @@ const accountController = require("../controllers/accountController");
 // Route to account login
 router.get("/login", accountController.buildLogin)
 
+// Process the login attempt
+router.post(
+  "/login",
+  (req, res) => {
+    res.status(200).send('login process')
+  }
+)
+
 // Route to account registration
 router.get("/register", Util.handleErrors(accountController.buildRegister))
 

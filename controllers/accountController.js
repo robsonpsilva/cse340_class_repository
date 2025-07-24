@@ -25,11 +25,9 @@ accountCont.buildLogin = async function (req, res, next) {
  * ************************** */
 accountCont.buildRegister = async function (req, res, next) {
   let nav = await utilities.getNav()
-  let grid = await utilities.buildRegisterScreen()
   res.render("account/register", {
-    title: "register",
+    title: "Register",
     nav,
-    grid,
     errors: null,
   })
 }
@@ -61,10 +59,12 @@ accountCont.registerAccount = async function (req, res, next) {
       errors: null,
     })
   } else {
+    grid = ''
     req.flash("notice", "Sorry, the registration failed.")
     res.status(501).render("account/register", {
       title: "Registration",
       nav,
+      grid,
       errors: null,
     })
   }

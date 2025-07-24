@@ -23,25 +23,25 @@ app.use(expressLayouts)
 app.set("layout", "./layouts/layout") // not at views root
 
 
-// 2. Body-parser (coloque AQUI se quiser que o middleware acima veja o req.body parseado)
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-// 1. Middleware de log de requisição (este é o que você quer!)
-app.use((req, res, next) => {
-  console.log('--- Requisição Recebida ---');
-  console.log('Método:', req.method);
-  console.log('URL Original:', req.originalUrl);
-  console.log('Cabeçalhos:', req.headers);
+// // 2. Body-parser (coloque AQUI se quiser que o middleware acima veja o req.body parseado)
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+// // 1. Middleware de log de requisição (este é o que você quer!)
+// app.use((req, res, next) => {
+//   console.log('--- Requisição Recebida ---');
+//   console.log('Método:', req.method);
+//   console.log('URL Original:', req.originalUrl);
+//   console.log('Cabeçalhos:', req.headers);
 
-  // Para ver o corpo (body) da requisição, você precisa que o body-parser já tenha agido.
-  // Se você colocar este middleware ANTES do body-parser, req.body estará vazio aqui.
-  // Se quiser ver o body RAW (não parseado), precisaria de outro tipo de leitura de stream.
-  // Para ver o body já parseado (como de um formulário POST), coloque este middleware APÓS os body-parsers.
-  console.log('Corpo da Requisição (req.body):', req.body); // Pode estar vazio se antes do body-parser
+//   // Para ver o corpo (body) da requisição, você precisa que o body-parser já tenha agido.
+//   // Se você colocar este middleware ANTES do body-parser, req.body estará vazio aqui.
+//   // Se quiser ver o body RAW (não parseado), precisaria de outro tipo de leitura de stream.
+//   // Para ver o body já parseado (como de um formulário POST), coloque este middleware APÓS os body-parsers.
+//   console.log('Corpo da Requisição (req.body):', req.body); // Pode estar vazio se antes do body-parser
 
-  console.log('--- Fim da Requisição Recebida ---');
-  next(); // IMPORTANTE: Passa a requisição para o próximo middleware/rota
-});
+//   console.log('--- Fim da Requisição Recebida ---');
+//   next(); // IMPORTANTE: Passa a requisição para o próximo middleware/rota
+// });
 
 
 

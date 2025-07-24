@@ -139,38 +139,38 @@ Util.buildLoginScreen = async function() {
   Build Registration Form
 */
 
-Util.buildRegisterScreen = async function() {
-  let grid
-  grid = 
-  `   <div class = "external">
-        <div class="form-container">
-            <p> All fields are required"</p>
-            <form id="registrationForm" action ="/account/register" method = "post" class="login-form">
-              <label for="account_firstname">First Name:*</label>
-              <input type="text" name ="account_firstname" id="account_firstname" placeholder="Enter your First Name" required>
+// Util.buildRegisterScreen = async function() {
+//   let grid
+//   grid = 
+//   `   <div class = "external">
+//         <div class="form-container">
+//             <p> All fields are required"</p>
+//             <form id="registrationForm" action ="/account/register" method = "post" class="login-form">
+//               <label for="account_firstname">First Name:*</label>
+//               <input type="text" name ="account_firstname" id="account_firstname" placeholder="Enter your First Name" required value="<%= locals.account_firstname %>">
 
-              <label for="account_lastname">Last Name:*</label>
-              <input type="text" name = "account_lastname" id="account_lastname" placeholder="Enter your Last Name" required>
+//               <label for="account_lastname">Last Name:*</label>
+//               <input type="text" name = "account_lastname" id="account_lastname" placeholder="Enter your Last Name" required value="<%= locals.account_lasttname %>">
 
-              <label for="account_email">Email:*</label>
-              <input type="email" name ="account_email" id="account_email" placeholder="Enter your email" required>
+//               <label for="account_email">Email:*</label>
+//               <input type="email" name ="account_email" id="account_email" placeholder="Enter your email" required>
 
-              <label for="account_password">Password:*</label>
-              <input type="password" name = "account_password" id="account_password" placeholder="Enter your password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+//               <label for="account_password">Password:*</label>
+//               <input type="password" name = "account_password" id="account_password" placeholder="Enter your password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
 
-              <small class="password-instructions">
-                Passwords must be a minimum of 12 characters and include 1 capital letter, 1 number, and 1 special character.
-              </small>
+//               <small class="password-instructions">
+//                 Passwords must be a minimum of 12 characters and include 1 capital letter, 1 number, and 1 special character.
+//               </small>
 
-              <button type="button" id="toggle-password">Show password</button>
-              <button type="submit">Register</button>
-            </form>
-        </div>
-      <div>
-  `
-  return grid
+//               <button type="button" id="toggle-password">Show password</button>
+//               <button type="submit">Register</button>
+//             </form>
+//         </div>
+//       <div>
+//   `
+//   return grid
   
-}
+// }
 
 Util.buildSuccessRegister = async function (account_firstname, account_lastname) {
    grid = `
