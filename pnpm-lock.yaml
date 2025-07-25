@@ -41,12 +41,15 @@ importers:
       express-validator:
         specifier: ^7.2.1
         version: 7.2.1
-      npmp:
-        specifier: ^0.1.1
-        version: 0.1.1
+      node:
+        specifier: ^20.19.4
+        version: 20.19.4
       pg:
         specifier: ^8.8.0
         version: 8.16.3
+      pnpm:
+        specifier: ^10.13.1
+        version: 10.13.1
     devDependencies:
       nodemon:
         specifier: ^3.1.0
@@ -410,6 +413,14 @@ packages:
     resolution: {integrity: sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==}
     engines: {node: '>= 0.6'}
 
+  node-bin-setup@1.1.4:
+    resolution: {integrity: sha512-vWNHOne0ZUavArqPP5LJta50+S8R261Fr5SvGul37HbEDcowvLjwdvd0ZeSr0r2lTSrPxl6okq9QUw8BFGiAxA==}
+
+  node@20.19.4:
+    resolution: {integrity: sha512-N0Yo0gnnKzDOXYUvR/ewjV/wKu2AFl+4eGs5IbVGjdFGsEtdSAOGc6ATMb3zi/cFHfdCn4eB+b+zOxJF6kvitw==}
+    engines: {npm: '>=5.0.0'}
+    hasBin: true
+
   nodemon@3.1.10:
     resolution: {integrity: sha512-WDjw3pJ0/0jMFmyNDp3gvY2YizjLmmOUQo6DEBY+JgdvW/yQ9mEeSw6H5ythl5Ny2ytb7f9C2nIbjSxMNzbJXw==}
     engines: {node: '>=10'}
@@ -418,82 +429,6 @@ packages:
   normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
     engines: {node: '>=0.10.0'}
-
-  npm@11.5.1:
-    resolution: {integrity: sha512-Iy5vXZ55m8tIaSCz6bqQf9+W5XbPfoyURsgWLjOkFglqHTep6RDZqRj2sfYGeRyZvGu2HuJWm0lux0rxPQ29lQ==}
-    engines: {node: ^20.17.0 || >=22.9.0}
-    hasBin: true
-    bundledDependencies:
-      - '@isaacs/string-locale-compare'
-      - '@npmcli/arborist'
-      - '@npmcli/config'
-      - '@npmcli/fs'
-      - '@npmcli/map-workspaces'
-      - '@npmcli/package-json'
-      - '@npmcli/promise-spawn'
-      - '@npmcli/redact'
-      - '@npmcli/run-script'
-      - '@sigstore/tuf'
-      - abbrev
-      - archy
-      - cacache
-      - chalk
-      - ci-info
-      - cli-columns
-      - fastest-levenshtein
-      - fs-minipass
-      - glob
-      - graceful-fs
-      - hosted-git-info
-      - ini
-      - init-package-json
-      - is-cidr
-      - json-parse-even-better-errors
-      - libnpmaccess
-      - libnpmdiff
-      - libnpmexec
-      - libnpmfund
-      - libnpmorg
-      - libnpmpack
-      - libnpmpublish
-      - libnpmsearch
-      - libnpmteam
-      - libnpmversion
-      - make-fetch-happen
-      - minimatch
-      - minipass
-      - minipass-pipeline
-      - ms
-      - node-gyp
-      - nopt
-      - normalize-package-data
-      - npm-audit-report
-      - npm-install-checks
-      - npm-package-arg
-      - npm-pick-manifest
-      - npm-profile
-      - npm-registry-fetch
-      - npm-user-validate
-      - p-map
-      - pacote
-      - parse-conflict-json
-      - proc-log
-      - qrcode-terminal
-      - read
-      - semver
-      - spdx-expression-parse
-      - ssri
-      - supports-color
-      - tar
-      - text-table
-      - tiny-relative-date
-      - treeverse
-      - validate-npm-package-name
-      - which
-
-  npmp@0.1.1:
-    resolution: {integrity: sha512-JAqXBOGONVmsr0MxCfVKqMw8hqKSE+gdqix0NzgiuUfpMwdpxBEMOEPg3wlLWxLm3jLvTO2EUW1MSBU7+njJzQ==}
-    hasBin: true
 
   object-inspect@1.13.4:
     resolution: {integrity: sha512-W67iLl4J2EXEGTbfeHCffrjDfitvLANg0UlX3wFUUSTx92KXRFegMHUVgSqE+wvhAbi4WqjGg9czysTV2Epbew==}
@@ -551,6 +486,11 @@ packages:
   picomatch@2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
+
+  pnpm@10.13.1:
+    resolution: {integrity: sha512-N+vxpcejDV+r4MXfRO6NpMllygxa89urKMOhaBtwolYhjQXIHJwNz3Z+9rhVHrW5YAQrntQwDFkkIzY3fgHPrQ==}
+    engines: {node: '>=18.12'}
+    hasBin: true
 
   postgres-array@2.0.0:
     resolution: {integrity: sha512-VpZrUqU5A69eQyW2c5CA1jtLecCsN2U/bD6VilrFDWq5+5UIEVO7nazS3TEcHf1zuPYO/sqGvUvW62g86RXZuA==}
@@ -1083,6 +1023,12 @@ snapshots:
 
   negotiator@0.6.3: {}
 
+  node-bin-setup@1.1.4: {}
+
+  node@20.19.4:
+    dependencies:
+      node-bin-setup: 1.1.4
+
   nodemon@3.1.10:
     dependencies:
       chokidar: 3.6.0
@@ -1097,12 +1043,6 @@ snapshots:
       undefsafe: 2.0.5
 
   normalize-path@3.0.0: {}
-
-  npm@11.5.1: {}
-
-  npmp@0.1.1:
-    dependencies:
-      npm: 11.5.1
 
   object-inspect@1.13.4: {}
 
@@ -1152,6 +1092,8 @@ snapshots:
       split2: 4.2.0
 
   picomatch@2.3.1: {}
+
+  pnpm@10.13.1: {}
 
   postgres-array@2.0.0: {}
 
