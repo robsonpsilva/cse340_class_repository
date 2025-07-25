@@ -1,0 +1,23 @@
+<!-- Creating the content heading -->
+ <% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+<!-- The next code shows a message on the screen -->
+ <%# messages() %>
+<!-- Here we are showing the view main content -->
+ <div class = "external">
+  <div class="form-container">
+    <p> All fields are required"</p>
+    <form id="vehicleForm" name="vehicleForm" action = "/inv/add_classification" method = "post" class="login-form">
+      <h2>Classification Name</h2>
+
+      <!-- Make -->
+      <label for="classification_name">NAME MUST ALPHABETIC CHARACTERS ONLY WITHOUT SPACE</label>
+      <input type="text" id="classification_name" name="classification_name" required placeholder="Enter the classification" value="<%= locals.inv_make %>" pattern="[a-zA-Z]*$">
+      <!-- Submit Button -->
+      <button type="submit">Add Classification</button>
+    </form>
+  </div>
+</div>

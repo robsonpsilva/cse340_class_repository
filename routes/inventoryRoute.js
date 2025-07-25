@@ -1,13 +1,25 @@
 // Needed Resources 
+
+const classValidate = require('../utilities/classification-validation')
 const express = require("express")
 const router = new express.Router() 
 const Util = require("../utilities")
 
+
 const invController = require("../controllers/invController")
 
-router.get("/", (req, res) => {
-  res.redirect("/");
-});
+//Route to the Management Page
+router.get("/", Util.handleErrors(invController.management));
+
+//Route to the Add New Classification Form
+router.get("/add_classification", Util.handleErrors(invController.buildAddClassification))
+
+//Process the Add Classification attempt
+router.post("/add_classification", classValidate.addClassRules(), classValidate.checkClassData, Util.handleErrors(invController.registerClass))
+
+//Route to the Add New Vehicle Form
+router.get("/add_inventory", Util.handleErrors(invController.buildAddInventory)) 
+
 // Route to build inventory by classification view
 router.get("/type/:classificationId", Util.handleErrors(invController.buildByClassificationId))
 

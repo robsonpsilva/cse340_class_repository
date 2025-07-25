@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model")
+const classModel = require("../models/classification-model")
 const utilities = require("../utilities")
 
 const invCont = {}
@@ -49,7 +50,70 @@ invCont.buildByInvId = async function (req, res, next) {
   }
 
  }
-  
+
+/*
+* Build Insert Page to Classification and Inventory tables
+*/
+invCont.management = async function (req, res, next) { 
+  let nav = await utilities.getNav()
+  res.render("./inventory/management", {
+    title:"Management",
+    nav,
+  }
+  )
+}
+
+/*
+* Add Classification Form
+*/
+invCont.buildAddClassification = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/add_classification", {
+    title:"Add Classification",
+    nav,
+  }
+  )
+}
+
+/*
+* Add Inventory Form
+*/
+invCont.buildAddInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/add_inventory", {
+    title:"Add Inventory",
+    nav,
+  }
+  )
+}
+
+/* ****************************************
+*  Process Registration
+* *************************************** */
+invCont.registerClass = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const { classification_name } = req.body
+  const addResult = await classModel.registerClass(classification_name)
+  if (addResult) {
+    req.flash(
+      "notice",
+      `Congratulations, you\'re added ${classification_name}.`
+    )
+    res.status(201).render("./inventory/add_classificatiom", {
+      title: "Add Classification",
+      nav,
+      errors: null,
+    })
+  } else {
+    req.flash("notice", "Sorry, the inserting failed.")
+    res.status(501).render("./inventory/add_classification", {
+      title: "Add Classification",
+      nav,
+      errors: null,
+    })
+  }
+}
+
 /*******************
     Link test error
 *******************/
