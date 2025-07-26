@@ -80,9 +80,11 @@ invCont.buildAddClassification = async function (req, res, next) {
 */
 invCont.buildAddInventory = async function (req, res, next) {
   let nav = await utilities.getNav()
+  let list = await utilities.buildClassificationList()
   res.render("./inventory/add_inventory", {
     title:"Add Inventory",
     nav,
+    list,
   }
   )
 }

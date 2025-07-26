@@ -347,7 +347,7 @@ nav ul li{
   color: white;
 }
 
-.login-form input {
+input, textarea, select {
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;
@@ -355,19 +355,28 @@ nav ul li{
   border: 1px solid #aaa;
 }
 
-input:required:invalid, input:focus:invalid{
+
+input:required:invalid,
+select:required:invalid, 
+textarea:required:invalid,
+input:focus:invalid,
+select:focus:invalid,
+textarea:focus:invalid{
   border: 2px solid #e74c3c;
   box-shadow: 0 0 5px rgba(231, 76, 60, 0.7);
 }
 
-input:required:valid {
-    border-color: #28a745; /* Borda verde para indicar sucesso */
+input:required:valid,
+select:required:valid,
+textarea:required:valid{
     box-shadow: 0 0 5px rgba(40, 167, 69, 0.5); /* Sombra suave verde */
-    background-color: #e6ffe6; /* Fundo verde claro */
+    background-color: #C7E8CA /* Fundo verde claro */
 }
 
 /* Opcional: Estilos para quando o campo está inválido (boa prática para feedback negativo) */
-input:required:invalid {
+input:required:invalid, 
+select:required:invalid, 
+textarea:required:invalid {
     border-color: #dc3545; /* Borda vermelha para indicar erro */
     box-shadow: 0 0 5px rgba(220, 53, 69, 0.5); /* Sombra suave vermelha */
     background-color: #ffe6e6; /* Fundo vermelho claro */
