@@ -2,6 +2,8 @@ const invModel = require("../models/inventory-model")
 const classModel = require("../models/classification-model")
 const utilities = require("../utilities")
 
+
+
 const invCont = {}
 
 /* ***************************
@@ -11,14 +13,23 @@ invCont.buildByClassificationId = async function (req, res, next) {
   const classification_id = req.params.classificationId
   try{
     const data = await invModel.getInventoryByClassificationId(classification_id)
-    const grid = await utilities.buildClassificationGrid(data)
     let nav = await utilities.getNav()
-    const className = data[0].classification_name
-    res.render("./inventory/classification", {
-      title: className + " vehicles",
-      nav,
-      grid,
-    })
+    const grid = await utilities.buildClassificationGrid(data)
+    if (data.length > 0){
+      const className = data[0].classification_name
+      res.render("./inventory/classification", {
+        title: className + " vehicles",
+        nav,
+        grid,
+      })
+    } 
+    else{
+      res.render("./inventory/classification", {
+        title: "Data Not Found",
+        nav,
+        grid,
+      })
+    }
   }
   catch(err){
     next(err)
@@ -108,7 +119,7 @@ invCont.registerClass = async function (req, res, next) {
       errors: null,
     })
   } else {
-    req.flash("notice", "Sorry, the inserting failed.")
+    req.flash("error", "Sorry, the inserting failed.")
     res.status(501).render("./inventory/add_classification", {
       title: "Add New Classification",
       nav,
@@ -121,7 +132,7 @@ invCont.registerCar = async function (req, res, next) {
   let nav = await utilities.getNav()
   let list = await utilities.buildClassificationList()
   const {inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail,inv_price, inv_miles, inv_color, classification_id} = req.body
-  const addResult = await invModel.addCartoInventory(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail,inv_price, inv_miles, inv_color, classification_id)
+  const addResult = await invModel.addCartoInventory(inv_make, inv_model, inv_year, inv_description, utilities.funEscapeHtml(inv_image), utilities.funEscapeHtml(inv_thumbnail),inv_price, inv_miles, inv_color, classification_id)
   if (addResult) {
     req.flash(
       "notice",
@@ -134,7 +145,7 @@ invCont.registerCar = async function (req, res, next) {
       errors: null,
     })
   } else {
-    req.flash("notice", "Sorry, the inserting failed.")
+    req.flash("error", "Sorry, the inserting failed.")
     res.status(501).render("./inventory/add_inventory", {
       title: "Add Inventory",
       nav,

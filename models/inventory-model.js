@@ -12,17 +12,23 @@ async function getClassifications(){
  * ************************** */
 async function getInventoryByClassificationId(classification_id) {
   try {
-    const data = await pool.query(
+    let id = Number(classification_id)
+    if (!Number.isNaN(id)){
+      const data = await pool.query(
       `SELECT * FROM public.inventory AS i 
       JOIN public.classification AS c 
       ON i.classification_id = c.classification_id 
       WHERE i.classification_id = $1`,
       [classification_id]
-    )
-    return data.rows
-  } catch (error) {
+      )
+      return data.rows
+    }
+    else{
+      throw new Error("Invalid Vehicle Category")
+    }
     
-    console.error("getclassificationsbyid error " + error)
+  } catch (error) {
+    return error
   }
 }
 

@@ -31,7 +31,7 @@ validate.checkClassData = async (req, res, next) => {
   if (!errors.isEmpty()) {
     const nav = await utilities.getNav();
     const formattedErrors = errors.array().map(err => err.msg);
-    req.flash("errors", formattedErrors);
+    req.flash("error", formattedErrors);
     return res.render("inventory/add_classification", {
       errors: errors.array(), // importante usar array()
       title: "Add Classification",

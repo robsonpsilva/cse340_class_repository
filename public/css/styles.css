@@ -499,6 +499,30 @@ input[type="password"] {
     background-color: #0056b3;
     transform: translateY(-2px);
 }
+#management{
+  list-style-type: none;
+}
+
+#messages {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-weight: bold;
+    list-style-type: none;
+}
+
+/* ESTE É O IMPORTANTE! */
+.error {
+    color: #a94442; /* Um vermelho escuro para o texto */
+    border-color: #ebccd1; /* Uma borda em tom vermelho */
+}
+
+/* Se você ainda quiser um estilo para 'notice' */
+.notice {
+    color: #023852;
+    border-color: #bce8f1;
+}
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .success-card {
@@ -547,7 +571,7 @@ h2{
   font-size: var(--medium-font);
 }
 h3{
-  font-size: var(var(--tiny-smaller-font));
+  font-size: var(--tiny-smaller-font);
 }
 
 .form-container h3{
@@ -614,6 +638,15 @@ h3{
     color: #333;
 }
 @media (max-width:490px){
+  h1{
+      font-size: var(--medium-font);
+  }
+  h2{
+    font-size: var(--small-font-font);
+  }
+  h3{
+    font-size: var(--tiny-smaller-font);
+  }
   #wrapper{
     border:none;
   }

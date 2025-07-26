@@ -98,9 +98,9 @@ validate.checkInvData = async (req, res, next) => {
     if (!errors.isEmpty()) {
         const nav = await utilities.getNav();
         let list = await utilities.buildClassificationList(req.body.classification_id)
-        req.flash("notice", "Sorry, the inserting failed. Err 400.")
+        req.flash("error", "Sorry, the inserting failed. Err 400.")
         const formattedErrors = errors.array().map(err => err.msg);
-        req.flash("errors", formattedErrors);
+        req.flash("error", formattedErrors);
         return res.status(400).render("inventory/add_inventory", {
           title: "Add Inventory",
           nav,

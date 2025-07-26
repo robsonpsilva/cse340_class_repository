@@ -4,4 +4,14 @@
   res.redirect('/')
 } %>
 <!-- The next code shows a message on the screen -->
- <%= message %>
+ <% if (messages && Object.keys(messages).length > 0) { %>
+    <div id="flash-messages">
+        <% for (const type in messages) { %>
+            <% messages[type].forEach(function(message){ %>
+                <div class="alert <%= type %>">
+                    <%- messages() %>
+                </div>
+            <% }); %>
+        <% } %>
+    </div>
+<% } %>
