@@ -42,6 +42,16 @@ async function getCarbyInvId(inv_id) {
   }
 }
 
+async function addCartoInventory(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail,inv_price, inv_miles, inv_color) {
+  try{
+    const data = await pool.query(`INSERT INTO inventory values($1, $2, $3, $4, $5, $6, $7, $8, $9)`, 
+      [inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail,inv_price, inv_miles, inv_color] )
+    return true
+  }
+  catch(error){
+    console("Database insertion err in table inventory")
+    return error
+  }
+}
 
-
-module.exports = {getClassifications, getInventoryByClassificationId, getCarbyInvId}
+module.exports = {getClassifications, getInventoryByClassificationId, getCarbyInvId, addCartoInventory}

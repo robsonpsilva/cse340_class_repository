@@ -89,9 +89,10 @@ invCont.buildAddInventory = async function (req, res, next) {
   )
 }
 
-/* ****************************************
-*  Process Registration
-* *************************************** */
+/* *********************************************************************
+* Insert process
+* Adding aa new class in the classification table
+* **********************************************************************/
 invCont.registerClass = async function (req, res, next) {
   let nav = await utilities.getNav()
   const { classification_name } = req.body
@@ -102,7 +103,7 @@ invCont.registerClass = async function (req, res, next) {
       `Congratulations, you\'re added ${classification_name}.`
     )
     res.status(201).render("./inventory/add_classification", {
-      title: "Add Classification success",
+      title: "Add Classification",
       nav,
       errors: null,
     })
@@ -115,6 +116,32 @@ invCont.registerClass = async function (req, res, next) {
     })
   }
 }
+
+invCont.registerCar = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const {inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail,inv_price, inv_miles, inv_color} = req.body
+  const addResult = await invModel.addCartoInventory(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail,inv_price, inv_miles, inv_color)
+  if (addResult) {
+    req.flash(
+      "notice",
+      `Congratulations, you\'re added ${inv_model} a new model.`
+    )
+    res.status(201).render("./inventory/add_inventory", {
+      title: "Add Inventory",
+      nav,
+      errors: null,
+    })
+  } else {
+    req.flash("notice", "Sorry, the inserting failed.")
+    res.status(501).render("./inventory/add_inventory", {
+      title: "Add Inventory",
+      nav,
+      errors: null,
+    })
+  }
+}
+
+
 
 /*******************
     Link test error

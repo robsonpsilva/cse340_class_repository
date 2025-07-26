@@ -1,6 +1,7 @@
 // Needed Resources 
 
-const classValidate = require('../utilities/classification-validation')
+const classValidate = require("../utilities/classification-validation")
+const invValidate = require("../utilities/inventory-validation")
 const express = require("express")
 const router = new express.Router() 
 const Util = require("../utilities")
@@ -19,6 +20,10 @@ router.post("/add_classification", classValidate.addClassRules(), classValidate.
 
 //Route to the Add New Vehicle Form
 router.get("/add_inventory", Util.handleErrors(invController.buildAddInventory)) 
+
+//Process the Add new car attempt
+
+route.post("/add_inventory", invValidate.add )
 
 // Route to build inventory by classification view
 router.get("/type/:classificationId", Util.handleErrors(invController.buildByClassificationId))

@@ -1,12 +1,12 @@
 const utilities = require(".")
 const { body, validationResult } = require("express-validator")
-const validation = {}
+const validate = {}
 const classificationModel = require("../models/classification-model")
 
 /*  **********************************
 *  Classification Data Validation Rules
 * ********************************* */
-validation.addClassRules = () => {
+validate.addClassRules = () => {
   return [
     body("classification_name")
       .trim()
@@ -24,7 +24,7 @@ validation.addClassRules = () => {
 }
 
 
-validation.checkClassData = async (req, res, next) => {
+validate.checkClassData = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const nav = await utilities.getNav();
@@ -35,7 +35,7 @@ validation.checkClassData = async (req, res, next) => {
       classification_name: req.body.classification_name // mantém o valor digitado
     });
   }
-  next(); // ✔️ Continua o fluxo!
+  next();
 };
 
-module.exports = validation 
+module.exports = validate 
