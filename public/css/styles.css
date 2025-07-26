@@ -328,8 +328,11 @@ nav ul li{
   padding: 20px 15px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0,0,0,0.08);
-  width: 300px;
+  width: 320px;
   border: 1px solid #393838;
+}
+.form-container form{
+  border-radius: 10px;
 }
 .login-form{
   background-color: #0056b3;
@@ -496,7 +499,6 @@ input[type="password"] {
     background-color: #0056b3;
     transform: translateY(-2px);
 }
-
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .success-card {
@@ -536,6 +538,23 @@ body{
 
 h1,h2,h3{
   font-family: var(--font-heading);
+}
+
+h1{
+    font-size: var(--large-font);
+}
+h2{
+  font-size: var(--medium-font);
+}
+h3{
+  font-size: var(var(--tiny-smaller-font));
+}
+
+.form-container h3{
+  color: white;
+}
+.form-container label{
+  font-size: var(--tiny-smaller-font);
 }
 
 @media (max-width: 810px){
@@ -595,12 +614,6 @@ h1,h2,h3{
     color: #333;
 }
 @media (max-width:490px){
-  h1{
-    font-size: var(--medium-font);
-  }
-  h2{
-    font-size: var(--small-font);
-  }
   #wrapper{
     border:none;
   }
@@ -646,6 +659,12 @@ h1,h2,h3{
   .detail-row .value,
   .detail-row .label {
       font-size: 0.9em; /* Reduz o tamanho da fonte dos detalhes */
+  }
+  .form-container{
+    width: 300px;
+  }
+  .menu{
+    font-size: var(--tiny-smaller-font);
   }
   body{
     background-image:none;

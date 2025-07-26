@@ -10,22 +10,20 @@ const validate = {}
 validate.addInventoryRules = () => {
   return [
     body("classification_id")
+        .trim()
+        .escape()
         .notEmpty()
-        .withMessage("Classification is required.")
-        .isInt()
-        .withMessage("Classification must be a valid number."),
+        .withMessage("Classification must be a valid option."),
     body("inv_make")
         .trim()
         .escape()
-        .notEmpty()
-        .withMessage("A valid make is required."),
+        .isLength({min:3})
+        .withMessage("Make must have at least three characters."),
     body("inv_model")
         .trim()
         .escape()
-        .notEmpty()
-        .withMessage("A valid model is required.")
         .isLength({min:3})
-        .withMessage("The model must have at least three characters."),
+        .withMessage("Model must have at least three characters."),
     body("inv_description")
         .trim()
         .escape()
@@ -43,35 +41,47 @@ validate.addInventoryRules = () => {
         .withMessage("A thumbnail image is required"),
     body("inv_price")
         .trim()
+        .escape()
         .notEmpty()
         .withMessage("Price is required.")
         .customSanitizer(value => {
             if (typeof value === "string") {
-                if (value.includes(",") && value.includes(".")) {
-                // Brazilian format with thousand separator and decimal
+                value = value.trim();
+
+                // "1.234,5" ou "1.234,56"
+                if (value.match(/^\d{1,3}(\.\d{3})*,\d{1,2}$/)) {
                 return value.replace(/\./g, "").replace(",", ".");
-                } else if (value.includes(",")) {
-                // Brazilian format with decimal comma only
+                }
+
+                // "1234,5" ou "1234,56"
+                if (value.match(/^\d+,\d{1,2}$/)) {
                 return value.replace(",", ".");
                 }
-                // American format → leave unchanged
+
+                // "1234.5" ou "1234.56"
+                if (value.match(/^\d+(\.\d{1,2})?$/)) {
+                return value;
+                }
+
+                // Inteiros sem decimal
+                if (value.match(/^\d+$/)) {
+                return value;
+                }
             }
+
             return value;
-        })
-        .matches(/^\d+(\.\d{2})?$/)
+            })
         .withMessage("Price must be in a valid format (e.g., 1234.56).")
         .isFloat({ min: 0.01, max: 5000000 })
         .withMessage("Price must be between $0.01 and $5,000,000.00."),
     body("inv_year")
         .trim()
-        .notEmpty()
-        .withMessage("Year is required.")
+        .escape()
         .matches(/^\d{4}$/)
         .withMessage("Year must be a 4-digit number."),
     body("inv_miles")
         .trim()
-        .notEmpty()
-        .withMessage("Mileage is required.")
+        .escape()
         .isInt({ min: 0 })
         .withMessage("Mileage must be a non-negative integer."),
     body("inv_color")
@@ -98,8 +108,8 @@ validate.checkInvData = async (req, res, next) => {
           inv_make: req.body.inv_make,
           inv_model: req.body.inv_model,
           inv_description: req.body.inv_description,
-          inv_image: utilities.funescapeHtml(req.body.inv_image),
-          inv_thumbnail: utilities.funescapeHtml(req.body.inv_thumbnail),
+          inv_image: utilities.funEscapeHtml(req.body.inv_image),
+          inv_thumbnail: utilities.funEscapeHtml(req.body.inv_thumbnail),
           inv_price: req.body.inv_price,
           inv_year: req.body.inv_year,
           inv_miles: req.body.inv_miles,

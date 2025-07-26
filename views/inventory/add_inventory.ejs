@@ -11,17 +11,18 @@
 <!-- Here we are showing the view main content -->
  <div class = "external">
   <div class="form-container">
+    <h2> All fields are required</h2>
     <form id="vehicleForm" name="vehicleForm" action = "/inv/add_inventory" method = "post" class="login-form">
       <!-- Classification Dropdown -->
       <label for="classification_id" >Classification:</label>
       <%-list%>
       <!-- Make -->
       <label for="inv_make">Make:</label>
-      <input type="text" id="inv_make" name="inv_make" required placeholder="Min of 3 characters" value="<%= locals.inv_make %>">
+      <input type="text" id="inv_make" name="inv_make" required placeholder="Min of 3 characters" pattern=".{3,}" value="<%= locals.inv_make %>">
 
       <!-- Model -->
       <label for="inv_model">Model:</label>
-      <input type="text" id="inv_model" name="inv_model" required placeholder="Min of 3 characters" value="<%= locals.inv_model %>">
+      <input type="text" id="inv_model" name="inv_model" required placeholder="Min of 3 characters" pattern=".{3,}" value="<%= locals.inv_model %>">
 
       <!-- Description -->
       <label for="inv_description">Description:</label>

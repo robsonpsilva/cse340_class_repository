@@ -213,7 +213,7 @@ Util.buildClassificationList = async function (classification_id = null) {
 * Handle Errors Midlleware
 */
 
-Util.funescapeHtml = function(safe) {
+Util.funEscapeHtml = function(safe) {
   return safe
     .replace(/&#x2F;/g, '/')
     .replace(/&lt;/g, '<')

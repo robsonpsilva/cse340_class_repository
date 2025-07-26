@@ -69,7 +69,7 @@ invCont.management = async function (req, res, next) {
 invCont.buildAddClassification = async function (req, res, next) {
   let nav = await utilities.getNav()
   res.render("./inventory/add_classification", {
-    title:"Add Classification",
+    title:"Add New Classification",
     nav,
   }
   )
@@ -103,14 +103,14 @@ invCont.registerClass = async function (req, res, next) {
       `Congratulations, you\'re added ${classification_name}.`
     )
     res.status(201).render("./inventory/add_classification", {
-      title: "Add Classification",
+      title: "Add New Classification",
       nav,
       errors: null,
     })
   } else {
     req.flash("notice", "Sorry, the inserting failed.")
     res.status(501).render("./inventory/add_classification", {
-      title: "Add Classification",
+      title: "Add New Classification",
       nav,
       errors: null,
     })
