@@ -7,7 +7,7 @@ async function checkExistingClass(classification_name){
   try {
     const sql = "SELECT * FROM classification WHERE classification_name = $1"
     const classification = await pool.query(sql, [classification_name])
-    return classification.rowCount
+    return classification.rowCount > 0
   } catch (error) {
     return error.message
   }
