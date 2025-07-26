@@ -5,13 +5,15 @@
   res.redirect('/')
 } %>
 <!-- The next code shows a message on the screen -->
- <%# messages() %>
+ <%- messages() %>
+
+
 <!-- Here we are showing the view main content -->
  <div class = "external">
   <div class="form-container">
-    <form id="vehicleForm" name="vehicleForm" action = "/inventory/add_inventory" method = "post" class="login-form">
+    <form id="vehicleForm" name="vehicleForm" action = "/inv/add_inventory" method = "post" class="login-form">
       <!-- Classification Dropdown -->
-      <label for="classification_name" >Classification:</label>
+      <label for="classification_id" >Classification:</label>
       <%-list%>
       <!-- Make -->
       <label for="inv_make">Make:</label>
@@ -23,7 +25,7 @@
 
       <!-- Description -->
       <label for="inv_description">Description:</label>
-      <textarea id="inv_description" name="inv_description" rows="4" required placeholder="Enter the vehicle description" value="<%= locals.inv_description %>"></textarea>
+      <textarea id="inv_description" name="inv_description" rows="4" required placeholder="Enter the vehicle description" ><%= locals.inv_description %></textarea>
 
       <!-- Image Path -->
       <label for="inv_image">Image Path:</label>

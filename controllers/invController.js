@@ -119,8 +119,9 @@ invCont.registerClass = async function (req, res, next) {
 
 invCont.registerCar = async function (req, res, next) {
   let nav = await utilities.getNav()
-  const {inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail,inv_price, inv_miles, inv_color} = req.body
-  const addResult = await invModel.addCartoInventory(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail,inv_price, inv_miles, inv_color)
+  let list = await utilities.buildClassificationList()
+  const {inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail,inv_price, inv_miles, inv_color, classification_id} = req.body
+  const addResult = await invModel.addCartoInventory(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail,inv_price, inv_miles, inv_color, classification_id)
   if (addResult) {
     req.flash(
       "notice",
@@ -129,6 +130,7 @@ invCont.registerCar = async function (req, res, next) {
     res.status(201).render("./inventory/add_inventory", {
       title: "Add Inventory",
       nav,
+      list,
       errors: null,
     })
   } else {
@@ -136,6 +138,7 @@ invCont.registerCar = async function (req, res, next) {
     res.status(501).render("./inventory/add_inventory", {
       title: "Add Inventory",
       nav,
+      list,
       errors: null,
     })
   }

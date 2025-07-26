@@ -46,8 +46,17 @@ validate.addInventoryRules = () => {
         .notEmpty()
         .withMessage("Price is required.")
         .customSanitizer(value => {
-            // Remove pontos usados como separadores de milhar, troca vírgula por ponto
-            return value.replace(/\./g, "").replace(",", ".");
+            if (typeof value === "string") {
+                if (value.includes(",") && value.includes(".")) {
+                // Brazilian format with thousand separator and decimal
+                return value.replace(/\./g, "").replace(",", ".");
+                } else if (value.includes(",")) {
+                // Brazilian format with decimal comma only
+                return value.replace(",", ".");
+                }
+                // American format → leave unchanged
+            }
+            return value;
         })
         .matches(/^\d+(\.\d{2})?$/)
         .withMessage("Price must be in a valid format (e.g., 1234.56).")
@@ -78,16 +87,19 @@ validate.checkInvData = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         const nav = await utilities.getNav();
-        return res.render("inventory/add_inventory", {
-          errors: errors.array(), // importante usar array()
+        let list = await utilities.buildClassificationList(req.body.classification_id)
+        req.flash("notice", "Sorry, the inserting failed. Err 400.")
+        const formattedErrors = errors.array().map(err => err.msg);
+        req.flash("errors", formattedErrors);
+        return res.status(400).render("inventory/add_inventory", {
           title: "Add Inventory",
           nav,
-          classification_id: req.body.classification_id, // mantém o valor digitado
+          list,
           inv_make: req.body.inv_make,
           inv_model: req.body.inv_model,
           inv_description: req.body.inv_description,
-          inv_image: req.body.inv_image,
-          inv_thumbnail: req.body.inv_thumbnail,
+          inv_image: utilities.funescapeHtml(req.body.inv_image),
+          inv_thumbnail: utilities.funescapeHtml(req.body.inv_thumbnail),
           inv_price: req.body.inv_price,
           inv_year: req.body.inv_year,
           inv_miles: req.body.inv_miles,

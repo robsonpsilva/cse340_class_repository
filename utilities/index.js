@@ -193,7 +193,7 @@ Util.buildSuccessRegister = async function (account_firstname, account_lastname)
 Util.buildClassificationList = async function (classification_id = null) {
     let data = await invModel.getClassifications()
     let classificationList =
-      '<select name="classification_name" id="classification_name" required>'
+      '<select name="classification_id" id="classification_id" required>'
     classificationList += "<option value=''>Choose a Classification</option>"
     data.rows.forEach((row) => {
       classificationList += '<option value="' + row.classification_id + '"'
@@ -212,6 +212,15 @@ Util.buildClassificationList = async function (classification_id = null) {
 /*
 * Handle Errors Midlleware
 */
+
+Util.funescapeHtml = function(safe) {
+  return safe
+    .replace(/&#x2F;/g, '/')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'");
+}
 
 Util.handleErrors = (controller) => {
   // Retorna a função de middleware real que o Express vai usar

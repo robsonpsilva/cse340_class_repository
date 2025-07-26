@@ -23,7 +23,7 @@ router.get("/add_inventory", Util.handleErrors(invController.buildAddInventory))
 
 //Process the Add new car attempt
 
-route.post("/add_inventory", invValidate.add )
+router.post("/add_inventory", invValidate.addInventoryRules(), invValidate.checkInvData, Util.handleErrors(invController.registerCar) )
 
 // Route to build inventory by classification view
 router.get("/type/:classificationId", Util.handleErrors(invController.buildByClassificationId))
