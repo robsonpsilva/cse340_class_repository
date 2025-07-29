@@ -17,6 +17,7 @@ const inventoryRoute = require("./routes/inventoryRoute")
 const utilities = require("./utilities")
 const session = require("express-session")
 const pool = require('./database/')
+const  cookieParser = require("cookie-parser")
 
 app.set("view engine", "ejs")
 app.use(expressLayouts)
@@ -69,6 +70,9 @@ app.use(function(req, res, next){
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
+//Unity 5 :ogin activity
+app.use(cookieParser())
 
 /* ***********************
  * Routes

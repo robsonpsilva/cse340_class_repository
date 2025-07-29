@@ -16,10 +16,8 @@ router.get("/login", accountController.buildLogin)
 router.post(
   "/login",
   regValidate.loginRules(),
-  regValidate.checkRegData,
-  (req, res) => {
-    res.status(200).send('login process')
-  }
+  regValidate.checkLoginData,
+  utilities.handleErrors(accountController.accountLogin)
 )
 
 // Route to account registration
