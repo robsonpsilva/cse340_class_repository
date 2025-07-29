@@ -127,4 +127,8 @@ async function accountLogin(req, res) {
   }
 }
 
-module.exports = accountCont, accountLoginfernandaß
+async function accountManagementView(req, res, next) {
+  
+}
+
+module.exports = accountCont, accountLogin

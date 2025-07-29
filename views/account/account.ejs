@@ -1,0 +1,7 @@
+<!-- Creating the content heading -->
+ <% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+<p>You're logged in</p>
