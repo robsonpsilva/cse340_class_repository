@@ -11,14 +11,14 @@ const accountController = require("../controllers/accountController")
 
 // Route to account login
 router.get("/login", accountController.buildLogin)
-router.get("/", accountController.)
+router.get("/", Util.checkLogin, Util.handleErrors(accountController.accountManagementView))
 
 // Process the login attempt
 router.post(
   "/login",
   regValidate.loginRules(),
   regValidate.checkLoginData,
-  utilities.handleErrors(accountController.accountLogin)
+  Util.handleErrors(accountController.accountLogin)
 )
 
 // Route to account registration

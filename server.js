@@ -14,6 +14,7 @@ const app = express();
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
+const accountRoute = require("./routes/accountRoute")
 const utilities = require("./utilities")
 const session = require("express-session")
 const pool = require('./database/')
@@ -73,6 +74,8 @@ app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-
 
 //Unity 5 :ogin activity
 app.use(cookieParser())
+app.use(utilities.checkJWTToken)
+
 
 /* ***********************
  * Routes
@@ -86,7 +89,7 @@ app.get("/", baseController.buildHome)
 app.use("/inv", inventoryRoute)
 
 //Account route
-app.use("/account", require("./routes/accountRoute"))
+app.use("/account", accountRoute)
 
 
 // File Not Found Route - must be last route in list

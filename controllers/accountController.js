@@ -88,7 +88,7 @@ accountCont.registerAccount = async function (req, res, next) {
 /* ****************************************
  *  Process login request
  * ************************************ */
-async function accountLogin(req, res) {
+accountCont.accountLogin = async function (req, res) {
   let nav = await utilities.getNav()
   const { account_email, account_password } = req.body
   const accountData = await accountModel.getAccountByEmail(account_email)
@@ -127,8 +127,8 @@ async function accountLogin(req, res) {
   }
 }
 
-async function accountManagementView(req, res, next) {
+accountCont.accountManagementView = async function(req, res, next) {
   
 }
 
-module.exports = accountCont, accountLogin
+module.exports = accountCont
