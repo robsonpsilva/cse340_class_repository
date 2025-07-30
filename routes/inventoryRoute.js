@@ -25,6 +25,10 @@ router.get("/add_inventory", Util.handleErrors(invController.buildAddInventory))
 
 router.post("/add_inventory", invValidate.addInventoryRules(), invValidate.checkInvData, Util.handleErrors(invController.registerCar) )
 
+//parei aqui e será preciso construir o método buildEditInventory
+
+router.get("/edit:inventory_id", Util.handleErrors(invController.buildEditInventory)
+
 /********************************
  * Ger inventory for AJX Route
  ********************************/
