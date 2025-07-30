@@ -129,10 +129,12 @@ accountCont.accountLogin = async function (req, res) {
 
 accountCont.accountManagementView = async function(req, res, next) {
   let nav = await utilities.getNav()
+  const classificationSelect = await utilities.buildClassificationList()
   res.status(201).render("account/account_management", {
       title: "Account Management",
       nav,
       errors: null,
+      classificationSelect,
     })
   
 }

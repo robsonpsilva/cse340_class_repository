@@ -25,6 +25,14 @@ router.get("/add_inventory", Util.handleErrors(invController.buildAddInventory))
 
 router.post("/add_inventory", invValidate.addInventoryRules(), invValidate.checkInvData, Util.handleErrors(invController.registerCar) )
 
+/********************************
+ * Ger inventory for AJX Route
+ ********************************/
+router.get(
+    "/getInventory/:classification_id",
+    Util.checkAccountType, Util.handleErrors(invController.getInventoryJSON)
+)
+
 // Route to build inventory by classification view
 router.get("/type/:classificationId", Util.handleErrors(invController.buildByClassificationId))
 
