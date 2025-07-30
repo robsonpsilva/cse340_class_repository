@@ -163,6 +163,7 @@ Util.handleErrors = (controller) => {
     } catch (error) {
       // If an error is thrown within the controller, it will be caught here.
       console.error("Error caught by handleErrors middleware:", error);
+      statusCode = 400
 
       // Determine the appropriate status code and error message.
       // Prioritize a 'statusCode' defined in the error itself (if you throw them with it).

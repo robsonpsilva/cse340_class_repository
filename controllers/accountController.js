@@ -5,7 +5,7 @@ const accountModel  = require("../models/account-model")
 const utilities = require("../utilities")
 const bcrypt = require("bcryptjs")
 const accountCont = {}
-const jwr = require("jsonwebtoken")
+const jwt = require("jsonwebtoken")
 require("dotenv").config()
 
 
@@ -93,7 +93,7 @@ accountCont.accountLogin = async function (req, res) {
   const { account_email, account_password } = req.body
   const accountData = await accountModel.getAccountByEmail(account_email)
   if (!accountData) {
-    req.flash("notice", "Please check your credentials and try again.")
+    req.flash("error", "Please check your credentials and try again.")
     res.status(400).render("account/login", {
       title: "Login",
       nav,
@@ -114,7 +114,7 @@ accountCont.accountLogin = async function (req, res) {
       return res.redirect("/account/")
     }
     else {
-      req.flash("message notice", "Please check your credentials and try again.")
+      req.flash("error", "Please check your credentials and try again.")
       res.status(400).render("account/login", {
         title: "Login",
         nav,
@@ -128,6 +128,12 @@ accountCont.accountLogin = async function (req, res) {
 }
 
 accountCont.accountManagementView = async function(req, res, next) {
+  let nav = await utilities.getNav()
+  res.status(201).render("account/account_management", {
+      title: "Account Management",
+      nav,
+      errors: null,
+    })
   
 }
 
