@@ -30,7 +30,7 @@ router.post("/add_inventory", invValidate.addInventoryRules(), invValidate.check
  ********************************/
 router.get(
     "/getInventory/:classification_id",
-    Util.checkAccountType, Util.handleErrors(invController.getInventoryJSON)
+    Util.handleErrors(invController.getInventoryJSON)
 )
 
 // Route to build inventory by classification view
@@ -42,3 +42,5 @@ router.get("/detail/:invId", Util.handleErrors(invController.buildByInvId))
 router.get("/error/:errParam", Util.handleErrors(invController.linkError))
 
 module.exports = router;
+
+//  Util.checkAccountType(),
