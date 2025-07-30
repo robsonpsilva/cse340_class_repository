@@ -80,9 +80,11 @@ invCont.getInventoryJSON = async (req, res, next) => {
 */
 invCont.management = async function (req, res, next) { 
   let nav = await utilities.getNav()
+  let classificationSelect = await utilities.buildClassificationList()
   res.render("inventory/management", {
     title:"Management",
     nav,
+    classificationSelect,
   }
   )
 }
