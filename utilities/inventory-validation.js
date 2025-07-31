@@ -119,4 +119,34 @@ validate.checkInvData = async (req, res, next) => {
       next();
 }
 
+
+
+validate.checkUpdateData = async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        const nav = await utilities.getNav();
+        let list = await utilities.buildClassificationList(req.body.classification_id)
+        req.flash("error", "Sorry, the updating failed. Err 400.")
+        const formattedErrors = errors.array().map(err => err.msg);
+        req.flash("error", formattedErrors);
+        const title = `Edit ${req.body.inv_make} ${req.body.inv_model}`
+        return res.status(400).render("inventory/update_inventory", {
+          title: title,
+          nav,
+          list,
+          inv_id: req.body.inv_id,
+          inv_make: req.body.inv_make,
+          inv_model: req.body.inv_model,
+          inv_description: req.body.inv_description,
+          inv_image: utilities.funEscapeHtml(req.body.inv_image),
+          inv_thumbnail: utilities.funEscapeHtml(req.body.inv_thumbnail),
+          inv_price: req.body.inv_price,
+          inv_year: req.body.inv_year,
+          inv_miles: req.body.inv_miles,
+          inv_color: req.body.inv_color
+        });
+      }
+      next();
+}
+
 module.exports = validate

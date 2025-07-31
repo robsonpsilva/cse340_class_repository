@@ -12,7 +12,7 @@
  <div class = "external">
   <div class="form-container">
     <h2> All fields are required</h2>
-    <form id="vehicleForm" name="vehicleForm" action = "/inv/edit" method = "post" class="login-form">
+    <form id="updateForm" name="updateForm" action = "/inv/update" method = "post" class="login-form">
       <!-- Classification Dropdown -->
       <label for="classification_id" >Classification:</label>
       <%-list%>
@@ -53,7 +53,9 @@
       <input type="text" id="inv_color" name="inv_color" required placeholder="Enter the vehicle color" value="<%= locals.inv_color %>">
 
       <!-- Submit Button -->
-      <button type="submit">Submit</button>
+      <button type="submit" disabled>Update Vehicle</button>
+      <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%= locals.inv_id %>" <% } %>>
     </form>
+    <script src="/js/inv-update.js"></script>
   </div>
 </div>

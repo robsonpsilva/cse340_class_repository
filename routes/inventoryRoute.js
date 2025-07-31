@@ -18,16 +18,24 @@ router.get("/add_classification", Util.handleErrors(invController.buildAddClassi
 //Process the Add Classification attempt
 router.post("/add_classification", classValidate.addClassRules(), classValidate.checkClassData, Util.handleErrors(invController.registerClass))
 
-//Route to the Add New Vehicle Form
+/************
+* Inventory CRUD
+*************/
+//Route to the Add(inserting new car) New Vehicle Form
 router.get("/add_inventory", Util.handleErrors(invController.buildAddInventory)) 
 
 //Process the Add new car attempt
 
 router.post("/add_inventory", invValidate.addInventoryRules(), invValidate.checkInvData, Util.handleErrors(invController.registerCar) )
 
-//parei aqui e será preciso construir o método buildEditInventory
+//Route to Edit a car data (Upadating an existing car)
 
 router.get("/edit/:inv_id", Util.handleErrors(invController.buildEditInventory))
+
+//Process a car updating
+
+router.post("/update/", invValidate.addInventoryRules(), invValidate.checkUpdateData,  Util.handleErrors(invController.updateInventory))
+
 
 /********************************
  * Ger inventory for AJX Route
@@ -41,6 +49,8 @@ router.get("/type/:classificationId", Util.handleErrors(invController.buildByCla
 router.get("/detail/:invId", Util.handleErrors(invController.buildByInvId))
 
 router.get("/error/:errParam", Util.handleErrors(invController.linkError))
+
+
 
 module.exports = router;
 

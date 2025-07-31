@@ -9,9 +9,11 @@ const router = new express.Router()
 
 const accountController = require("../controllers/accountController")
 
+
+router.get("/",Util.checkLogin, Util.handleErrors(accountController.accountManagementView))
+
 // Route to account login
 router.get("/login", accountController.buildLogin)
-router.get("/", Util.handleErrors(accountController.accountManagementView))
 
 // Process the login attempt
 router.post(

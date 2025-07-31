@@ -350,6 +350,13 @@ nav ul li{
   color: white;
 }
 
+button:disabled {
+  background-color: #cccccc; /* cinza claro */
+  color: #666666;            /* texto mais apagado */
+  cursor: not-allowed;       /* ícone de proibido ao passar o mouse */
+  opacity: 0.5;              /* leve transparência */
+}
+
 input, textarea, select {
   width: 100%;
   padding: 8px;
