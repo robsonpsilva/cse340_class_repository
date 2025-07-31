@@ -75,19 +75,7 @@ invCont.getInventoryJSON = async (req, res, next) => {
   }
 }
 
-/*
-* Build Insert Page to Classification and Inventory tables
-*/
-invCont.management = async function (req, res, next) { 
-  let nav = await utilities.getNav()
-  let classificationSelect = await utilities.buildClassificationList()
-  res.render("inventory/management", {
-    title:"Management",
-    nav,
-    classificationSelect,
-  }
-  )
-}
+
 
 /*
 * Add Classification Form
@@ -114,6 +102,7 @@ invCont.buildAddInventory = async function (req, res, next) {
   }
   )
 }
+
 
 /* *********************************************************************
 * Insert process
@@ -183,5 +172,55 @@ invCont.registerCar = async function (req, res, next) {
       return next(err)
     }
  }
+
+ /*
+* Build Insert Page to Classification and Inventory tables
+*/
+invCont.management = async function (req, res, next) { 
+  let nav = await utilities.getNav()
+  let classificationSelect = await utilities.buildClassificationList()
+  res.render("inventory/management", {
+    title:"Management",
+    nav,
+    classificationSelect,
+  }
+  )
+}
+
+ invCont.buildEditInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  let list = await utilities.buildClassificationList(req.params.inv_id)
+  const car = await invModel.getCarbyInvId(req.params.inv_id)
+  const {
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id
+  } = car[0]
+  const title = `Edit ${inv_make} ${inv_model}`
+  res.render("./inventory/update_inventory", {
+    title:title,
+    nav,
+    list,
+    inv_make: inv_make,
+    inv_model: inv_model,
+    inv_description: inv_description,
+    inv_image: utilities.funEscapeHtml(inv_image),
+    inv_thumbnail: utilities.funEscapeHtml(inv_thumbnail),
+    inv_price: inv_price,
+    inv_year: inv_year,
+    inv_miles: inv_miles,
+    inv_color: inv_color
+  }
+  )
+}
+
 
 module.exports = invCont

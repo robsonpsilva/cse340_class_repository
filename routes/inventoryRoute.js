@@ -27,15 +27,12 @@ router.post("/add_inventory", invValidate.addInventoryRules(), invValidate.check
 
 //parei aqui e será preciso construir o método buildEditInventory
 
-router.get("/edit:inventory_id", Util.handleErrors(invController.buildEditInventory)
+router.get("/edit/:inv_id", Util.handleErrors(invController.buildEditInventory))
 
 /********************************
  * Ger inventory for AJX Route
- ********************************/
-router.get(
-    "/getInventory/:classification_id",
-    Util.handleErrors(invController.getInventoryJSON)
-)
+********************************/
+router.get("/getInventory/:classification_id", Util.handleErrors(invController.getInventoryJSON))
 
 // Route to build inventory by classification view
 router.get("/type/:classificationId", Util.handleErrors(invController.buildByClassificationId))

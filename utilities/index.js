@@ -159,6 +159,7 @@ Util.handleErrors = (controller) => {
     try {
       // Tries to execute the controller function.
       // We pass the same arguments (req, res, next) that Express would provide.
+      
       await controller(req, res, next);
     } catch (error) {
       // If an error is thrown within the controller, it will be caught here.
