@@ -2,6 +2,7 @@
   Account Controller
 */
 const accountModel  = require("../models/account-model")
+const Util = require("../utilities")
 const utilities = require("../utilities")
 const bcrypt = require("bcryptjs")
 const accountCont = {}
@@ -111,6 +112,7 @@ accountCont.accountLogin = async function (req, res) {
       } else {
         res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
       }
+      //Util.setAuthStatus(req,res)
       return res.redirect("/account/")
     }
     else {
@@ -123,12 +125,15 @@ accountCont.accountLogin = async function (req, res) {
       })
     }
   } catch (error) {
+    res.locals.logedIn = false;
+    res.locals.user = null;
     throw new Error('Access Forbidden')
   }
 }
 
 accountCont.accountManagementView = async function(req, res, next) {
   let nav = await utilities.getNav()
+  Util.checkLogin
   const classificationSelect = await utilities.buildClassificationList()
   res.status(201).render("account/account_management", {
       title: "Account Management",

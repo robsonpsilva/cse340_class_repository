@@ -108,7 +108,7 @@ async function deleteInventory(
 ) {
   try {
     const sql =
-      "DELETE from public.inventory WHERE inv_make = $1 RETURNING *"
+      "DELETE from public.inventory WHERE inv_id = $1 RETURNING *"
       const data = await pool.query(sql, [inv_id])
     return data.rows[0]
   } catch (error) {

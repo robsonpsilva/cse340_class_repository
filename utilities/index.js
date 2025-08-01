@@ -218,6 +218,23 @@ Util.checkJWTToken = (req, res, next) => {
   }
  }
 
+Util.setAuthStatus = (req, res, next) =>  {
+  const token = req.cookies.jwt;
+
+  if (token) {
+    try {
+      const user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+      res.locals.logedIn = true;
+      res.locals.user = user
+    } catch (err) {
+      res.locals.logedIn = false;
+      res.locals.user = null;
+    }
+  } else {
+    res.locals.logedIn = false;
+    res.locals.user = null;
+  }
+}
 module.exports = Util
 
 

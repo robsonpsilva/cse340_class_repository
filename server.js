@@ -19,6 +19,7 @@ const utilities = require("./utilities")
 const session = require("express-session")
 const pool = require('./database/')
 const  cookieParser = require("cookie-parser")
+const jwt = require("jsonwebtoken")
 
 app.set("view engine", "ejs")
 app.use(expressLayouts)
@@ -44,8 +45,6 @@ app.use((req, res, next) => {
   console.log('--- Fim da Requisição Recebida ---');
   next(); // IMPORTANTE: Passa a requisição para o próximo middleware/rota
 });
-
-
 
 
 /* ***********************
@@ -76,6 +75,27 @@ app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-
 app.use(cookieParser())
 app.use(utilities.checkJWTToken)
 
+
+
+app.use((req, res, next) => {
+  const token = req.cookies.jwt;
+
+  if (token) {
+    try {
+      const user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+      res.locals.logedIn = true;
+      res.locals.user = user;
+    } catch (err) {
+      res.locals.logedIn = false;
+      res.locals.user = null;
+    }
+  } else {
+    res.locals.logedIn = false;
+    res.locals.user = null;
+  }
+
+  next();
+});
 
 /* ***********************
  * Routes

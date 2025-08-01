@@ -3,6 +3,11 @@
         <a href="/" title="Return to home page">CSE Motors</a>
     </span>
     <div id="tools">
-        <a href="/account/login" title="Click to log in">My Account</a>
+        <% if (!logedIn)  {%>
+            <a id = "myAccountLink" href="/account/login" title="Click to log in">My Account</a>
+        <% } else { %>
+            <a id = "accountManagementLink" href="/account/">Welcome <%=user.account_firstname%> <%= user.account_lastname %></a>
+            <a id = "loggoutLink" href="/">Logout</a>
+        <% } %>
     </div>
 </header>
