@@ -174,7 +174,7 @@ invCont.registerCar = async function (req, res, next) {
  }
 
  /*
-* Build Insert Page to Classification and Inventory tables
+* Build management
 */
 invCont.management = async function (req, res, next) { 
   let nav = await utilities.getNav()
@@ -186,6 +186,10 @@ invCont.management = async function (req, res, next) {
   }
   )
 }
+
+/*****************************
+ * Build the edit cr view
+ *****************************/
 
  invCont.buildEditInventory = async function (req, res, next) {
   let nav = await utilities.getNav()
@@ -281,6 +285,54 @@ invCont.updateInventory = async function (req, res, next) {
     inv_color,
     classification_id
     })
+  }
+}
+
+/*****************************
+ * Build the edit car view
+ *****************************/
+
+ invCont.buildDeleteInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const car = await invModel.getCarbyInvId(req.params.inv_id)
+  const {
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_price,
+    classification_id
+  } = car[0]
+  const title = `Delete ${inv_make} ${inv_model}`
+  res.render("./inventory/delete_confirm", {
+    title:title,
+    nav,
+    inv_id: inv_id,
+    inv_make: inv_make,
+    inv_model: inv_model,
+    inv_price: inv_price,
+    inv_year: inv_year,
+    classification_id: classification_id
+  }
+  )
+}
+
+
+/* ***************************
+ *  Delete Inventory Data
+ * ************************** */
+invCont.deleteInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const {
+    inv_id,
+  } = req.body
+  const deleteResult = await invModel.deleteInventory(inv_id)
+  if (deleteResult) {
+    req.flash("notice", "The deletion was successful.")
+    res.redirect("/inv/")
+  } else {
+    req,flash("error", "Sorry, the delete failed.")
+    res.redirect(`/inv/delete/${inv_id}`)
   }
 }
 

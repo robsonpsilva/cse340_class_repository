@@ -36,6 +36,13 @@ router.get("/edit/:inv_id", Util.handleErrors(invController.buildEditInventory))
 
 router.post("/update/", invValidate.addInventoryRules(), invValidate.checkUpdateData,  Util.handleErrors(invController.updateInventory))
 
+//Route to delete a car
+
+router.get("/delete/:inv_id", Util.handleErrors(invController.buildDeleteInventory))
+
+//Process a car deletion
+
+router.post("/delete/", Util.handleErrors(invController.deleteInventory))
 
 /********************************
  * Ger inventory for AJX Route
