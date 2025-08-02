@@ -19,7 +19,8 @@ const utilities = require("./utilities")
 const session = require("express-session")
 const pool = require('./database/')
 const  cookieParser = require("cookie-parser")
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+const Util = require("./utilities");
 
 app.set("view engine", "ejs")
 app.use(expressLayouts)
@@ -106,7 +107,11 @@ app.use(static)
 app.get("/", baseController.buildHome)
 
 // Inventory routes
-app.use("/inv", inventoryRoute)
+//This route validate authorization,
+//Only employees and manager can edit
+//inventory.
+
+app.use("/inv", Util.checkPermissions, inventoryRoute)
 
 //Account route
 app.use("/account", accountRoute)

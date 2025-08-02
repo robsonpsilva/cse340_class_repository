@@ -9,3 +9,5 @@ toggleBtn.addEventListener("click", () => {
   toggleBtn.textContent = visible ? "Hide password" : "Show password";
 });
 
+
+

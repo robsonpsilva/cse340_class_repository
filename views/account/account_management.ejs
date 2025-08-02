@@ -4,4 +4,22 @@
 <% } else {
   res.redirect('/')
 } %>
+
+ <%- messages() %>
+
+ <% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+<h2>Welcome <%= user_name %> </h2>
 <p>You're logged in</p>
+<a href="/account/edit/<%= user_id %>">Edit Account Information</a>
+<% if (employee_manager) { %>
+  <h3>Inventory Management</h3>
+  <p><a href="/inv">Manage Inventory</a></p>
+<%}%>
+

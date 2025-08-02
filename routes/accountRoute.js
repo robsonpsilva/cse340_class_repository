@@ -28,4 +28,17 @@ router.get("/register", Util.handleErrors(accountController.buildRegister))
 
 router.post("/register", regValidate.registationRules(), regValidate.checkRegData, Util.handleErrors(accountController.registerAccount))
 
+//Route to manage an user account
+
+router.get("/edit/:account_id", Util.handleErrors(accountController.editAccountView))
+
+//Route to change personal user data
+router.post("/edit", regValidate.editRules(), regValidate.checkEditData, Util.handleErrors(accountController.updateAccount))
+
+//Route to change personal password
+router.post("/pass", regValidate.passRules(), regValidate.checkEditPassData, Util.handleErrors(accountController.updateAccountPass))
+
+//Logout Route
+router.get("/logout", Util.handleErrors(accountController.logout))
+
 module.exports = router;

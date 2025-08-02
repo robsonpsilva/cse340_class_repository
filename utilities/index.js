@@ -39,9 +39,9 @@ Util.buildClassificationGrid = async function(data){
       + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
       + 'details"><img src="' + vehicle.inv_thumbnail 
       +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
-      +' on CSE Motors" /></a>'
+      +' on CSE Motors"></a>'
       grid += '<div class="namePrice">'
-      grid += '<hr />'
+      grid += '<hr>'
       grid += '<h2>'
       grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
       + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
@@ -217,6 +217,22 @@ Util.checkJWTToken = (req, res, next) => {
     return res.redirect("/account/login")
   }
  }
+
+ /**
+  * Test if user is Client because Client 
+  * can't access the site management section
+  */
+ Util.checkPermissions = (req, res, next) => {
+    const accountType = res.locals.user?.account_type?.trim()
+    if (!accountType || accountType.toLowerCase() === "client"){
+      req.flash("notice", "Unauthorized access.")
+      return res.redirect("/")
+    }
+    else{
+      next()
+    }
+ }
+
 
 Util.setAuthStatus = (req, res, next) =>  {
   const token = req.cookies.jwt;

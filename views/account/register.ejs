@@ -19,17 +19,17 @@
 <div class = "external">
   <div class="form-container">
       <p> All fields are required"</p>
-      <form id="registrationForm" action ="/account/register" method = "post" class="login-form">
+      <form id="registrationForm" action ="/account/register" method = "post" class="login-form" autocomplete="off">
         <label for="account_firstname">First Name:*</label>
-        <input type="text" name ="account_firstname" id="account_firstname" placeholder="Enter your First Name" required value="<%= locals.account_firstname %>">
+        <input type="text" name ="account_firstname" id="account_firstname" placeholder="Enter your First Name" required value="<%= account_firstname %>" autocomplete="off">
         <label for="account_lastname">Last Name:*</label>
-        <input type="text" name = "account_lastname" id="account_lastname" placeholder="Enter your Last Name" required value="<%= locals.account_lastname %>">
+        <input type="text" name = "account_lastname" id="account_lastname" placeholder="Enter your Last Name" required value="<%= account_lastname %>" autocomplete="off">
 
         <label for="account_email">Email:*</label>
-        <input type="email" name ="account_email" id="account_email" placeholder="Enter your email" required value="<%= locals.account_email %>">
+        <input type="email" name ="account_email" id="account_email" placeholder="Enter your email" required value="" autocomplete="off" autocomplete="nope">
 
         <label for="account_password">Password:*</label>
-        <input type="password" name = "account_password" id="account_password" placeholder="Enter your password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+        <input type="password" name = "account_password" id="account_password" placeholder="Enter your password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" autocomplete="new-password">
 
         <small class="password-instructions">
           Passwords must be a minimum of 12 characters and include 1 capital letter, 1 number, and 1 special character.
@@ -39,5 +39,13 @@
         <button type="submit">Register</button>
       </form>
   </div>
-<div>
+</div>
 <script src="/js/script.js" defer></script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('account_firstname').value = ''
+    document.getElementById('account_lastname').value = ''
+    document.getElementById('account_email').value = ''
+    document.getElementById('account_password').value = ''
+  })
+</script>

@@ -32,6 +32,10 @@ accountCont.buildRegister = async function (req, res, next) {
   res.render("account/register", {
     title: "Register",
     nav,
+    account_email: "",
+    account_firstname: "",
+    account_lastname: "",
+    account_password: "",
     errors: null,
   })
 }
@@ -132,16 +136,176 @@ accountCont.accountLogin = async function (req, res) {
 }
 
 accountCont.accountManagementView = async function(req, res, next) {
-  let nav = await utilities.getNav()
-  Util.checkLogin
-  const classificationSelect = await utilities.buildClassificationList()
+  const nav = await utilities.getNav()
+  const accountType = res.locals.user?.account_type?.trim()
+  let user_name = ""
+  let user_id
+  let employee_manager = false
+  if (!accountType){
+    //If we receive an invalid accountType, then we redirect to the home page.
+    req.flash("notice", "Unauthorized access.")
+    return res.redirect("/")
+  }
+  else {
+    user_name = res.locals.user.account_firstname
+    user_id = res.locals.user.account_id
+    if (accountType.toLowerCase() !== "client") {
+      employee_manager = true
+    }
+  } 
+  // const classificationSelect = await utilities.buildClassificationList()
   res.status(201).render("account/account_management", {
       title: "Account Management",
       nav,
+      user_name,
+      user_id,
+      employee_manager,
       errors: null,
-      classificationSelect,
+      // classificationSelect,
     })
   
+}
+
+accountCont.editAccountView = async function(req, res, next) {
+  const nav = await utilities.getNav()
+  const account_id = req.params.account_id;
+  const accountData = await accountModel.getAccountById(account_id)
+  const account_firstname = accountData.account_firstname
+  const account_lastname = accountData.account_lastname
+  const account_email = accountData.account_email
+  if (!accountData) {
+    req.flash("error", "Please check your credentials and try again.")
+    res.status(400).render("account/login", {
+      title: "Login",
+      nav,
+      errors: null,
+    })
+    return
+  }
+  else{
+    res.status(201).render("account/update_account", {
+      title: "Edit Account",
+      nav,
+      account_firstname,
+      account_lastname,
+      account_email,
+      account_id,
+      errors: null,
+      // classificationSelect,
+    })
+  }
+}
+
+
+
+accountCont.updateAccount = async function (req, res, next) {
+  const nav = await utilities.getNav()
+  let employee_manager = false
+  const { account_firstname, account_lastname, account_email, account_id } = req.body
+  const regResult = await accountModel.updateAccount(
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id
+  )
+  req.params.account_id = account_id
+  res.locals.user.account_firstname = account_firstname
+  res.locals.user.account_lastname = account_lastname
+
+  if (regResult) {
+    let user_name = account_firstname
+    let user_id = account_id
+    
+    let data = await accountModel.getAccountById(user_id)
+    if (data){
+      req.flash(
+      "notice",
+      `Congratulations, you update your account.`
+      )
+      if (data.account_type.toLowerCase() !== "client")
+      {
+        employee_manager = true
+      }
+      
+      res.render("account/account_management",
+        {
+          title: "Account Management",
+          nav,
+          user_name,
+          user_id,
+          employee_manager,
+          errors: null,
+        }
+      )
+    }
+    else{
+      req.flash(
+      "error",
+      `Error, The account update failed.`
+      )
+      accountCont.editAccountView(req, res, next)
+    }
+    
+  } else {
+    accountCont.editAccountView(req, res, next)
+  }
+}
+
+accountCont.updateAccountPass = async function (req, res, next) {
+  const nav = await utilities.getNav()
+  const { account_id_pass, account_password } = req.body
+  let employee_manager = false
+  // Hash the password before storing
+  let hashedPassword
+  let data = await accountModel.getAccountById(account_id_pass)
+  const {account_firstname, account_lastname,account_email, account_id, account_type} = data
+  req.body = {
+    account_email: account_email,
+    account_firstname: account_firstname,
+    account_lastname: account_lastname,
+    account_id: account_id
+  }
+  try {
+    // regular password and cost (salt is generated automatically)
+    hashedPassword = await bcrypt.hashSync(account_password, 10)
+    const regResult = await accountModel.updatePass(
+      account_id_pass,
+      hashedPassword 
+    )
+    if (regResult) { 
+        let user_name = account_firstname
+        let user_id = account_id
+        if (account_type.toLowerCase() !== "client")
+        {
+          employee_manager = true
+        }
+        req.flash(
+          "notice",
+          `Congratulations, you update your password.`
+        )
+        res.render("account/account_management",
+          {
+            title: "Account Management",
+            nav,
+            user_name,
+            user_id,
+            employee_manager,
+            errors: null,
+          }
+        ) 
+      }
+      else{
+        req.flash("error", "Sorry, the password update failed.")
+        accountCont.editAccountView(req, res, next)
+      }
+  } catch (error) {
+    req.flash("error", 'Sorry, there was an error processing the password update.')
+    accountCont.editAccountView(req, res, next)
+  }
+}
+accountCont.logout = async function (req, res, next) {
+  res.clearCookie("jwt")
+  res.redirect("/")
 }
 
 module.exports = accountCont
