@@ -4,18 +4,16 @@
 <% } else {
   res.redirect('/')
 } %>
-<!-- The next code shows a message on the screen -->
- <% if (messages && Object.keys(messages).length > 0) { %>
-    <div id="flash-messages">
-        <% for (const type in messages) { %>
-            <% messages[type].forEach(function(message){ %>
-                <div class="alert <%= type %>">
-                    <%- messages() %>
-                </div>
-            <% }); %>
-        <% } %>
-    </div>
+<%- messages() %>
+
+ <% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
 <% } %>
+
 <!-- Here we are showing the view main content -->
 <div class = "external">
   <div class="form-container">

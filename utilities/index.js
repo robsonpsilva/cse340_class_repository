@@ -225,8 +225,12 @@ Util.checkJWTToken = (req, res, next) => {
  Util.checkPermissions = (req, res, next) => {
     const accountType = res.locals.user?.account_type?.trim()
     if (!accountType || accountType.toLowerCase() === "client"){
-      req.flash("notice", "Unauthorized access.")
+      if (!req.originalUrl.includes('/inv/type')){
+        req.flash("notice", "Unauthorized access.")
       return res.redirect("/")
+      }
+      next()
+      
     }
     else{
       next()
