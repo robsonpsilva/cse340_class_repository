@@ -1,0 +1,66 @@
+<!-- Creating the content heading -->
+ <% if (title) { %>
+<h1 class="account_edit"><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+<!-- The next code shows a message on the screen -->
+ <%- messages() %>
+
+ <% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+<!-- Here we are showing the view main content -->
+<div class = "external">
+  <div class="form-container">
+      <!-- In this list we can search and select the user we want the manager to edit -->
+      <select name="account_user" id="account_user">
+        <%=account_lis%>
+      </select>
+      <!-- In the next filds we can edit users account type -->
+       <!-- The administrator can't change personal data, only account type -->
+      <p> All fields are required"</p>
+      <form id="editForm" action ="/account/admin" method = "post" class="login-form">
+        <label for="account_firstname">First Name:*</label>
+        <input type="text" name ="account_firstname" id="account_firstname" placeholder="Enter your First Name" required value="<%= account_firstname %>" readonly>
+        <label for="account_lastname">Last Name:*</label>
+        <input type="text" name = "account_lastname" id="account_lastname" placeholder="Enter your Last Name" required value="<%= account_lastname %>" readonly>
+
+        <label for="account_email">Email:*</label>
+        <input type="email" name ="account_email" id="account_email" placeholder="Enter your email" required value="<%= account_email %>"> readonly
+
+        <label for="account_type">Email:*</label>
+        <select id="account_type" name="account_type">
+          <%= account_type %>
+        </select>
+        
+        <input type="text" name="account_id" id="account_id" hidden value ="<%=account_id %>">
+        <button type="submit">Update</button>
+      </form>
+  </div>
+</div>
+<h2 class="account_edit">Update Password</h2>
+
+<div class = "external">
+  <div class="form-container">
+      <small class="password-instructions password-instructions-2">
+        Passwords must be a minimum of 12 characters and include 1 capital letter, 1 number, and 1 special character.
+      </small>
+      <small class="password-instruction password-instructions-2">
+        *note your original password will be changed
+      </small>
+      <form id="password" action ="/account/pass" method = "post" class="login-form">
+        <label for="account_password">Password:*</label>
+        <input type="password" name = "account_password" id="account_password" placeholder="Enter your password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+        <input type="text" name="account_id_pass" id="account_id_pass" hidden value ="<%=account_id %>">
+        <button type="button" id="toggle-password">Show password</button>
+        <button type="submit">Change Password</button>
+      </form>
+  </div>
+</div>
+
+<script src="/js/script.js" defer></script>
