@@ -21,5 +21,8 @@
 <% if (employee_manager) { %>
   <h3>Inventory Management</h3>
   <p><a href="/inv">Manage Inventory</a></p>
+  <% if (manager) { %>
+    <p><a href="/account/user_role"> User Role Administration</a></p>
+  <% } %>
 <%}%>
 

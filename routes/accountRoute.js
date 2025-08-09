@@ -41,4 +41,8 @@ router.post("/pass", regValidate.passRules(), regValidate.checkEditPassData, Uti
 //Logout Route
 router.get("/logout", Util.handleErrors(accountController.logout))
 
+router.get("/user_role/", Util.handleErrors(accountController.editAccountRole))
+
+router.get("/get-new-data/:userId", Util.handleErrors(accountController.getuserData))
+
 module.exports = router;

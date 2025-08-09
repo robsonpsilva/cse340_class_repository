@@ -141,6 +141,7 @@ accountCont.accountManagementView = async function(req, res, next) {
   let user_name = ""
   let user_id
   let employee_manager = false
+  let manager = false
   if (!accountType){
     //If we receive an invalid accountType, then we redirect to the home page.
     req.flash("notice", "Unauthorized access.")
@@ -151,6 +152,9 @@ accountCont.accountManagementView = async function(req, res, next) {
     user_id = res.locals.user.account_id
     if (accountType.toLowerCase() !== "client") {
       employee_manager = true
+      if (accountType.toLowerCase() === "admin"){
+        manager = true
+      }
     }
   } 
   // const classificationSelect = await utilities.buildClassificationList()
@@ -160,6 +164,7 @@ accountCont.accountManagementView = async function(req, res, next) {
       user_name,
       user_id,
       employee_manager,
+      manager,
       errors: null,
       // classificationSelect,
     })
@@ -306,6 +311,39 @@ accountCont.updateAccountPass = async function (req, res, next) {
 accountCont.logout = async function (req, res, next) {
   res.clearCookie("jwt")
   res.redirect("/")
+}
+
+accountCont.editAccountRole = async function (req, res, next) {
+  const nav = await utilities.getNav()
+  let data = await accountModel.getFullAccountList()
+  const firstAccount = data[0]
+  const account_firstname = firstAccount.account_firstname
+  const  account_lastname = firstAccount.account_lastname
+  const account_id = firstAccount.account_id
+  const account_email = firstAccount.account_email
+  const current_account_type = firstAccount.account_type
+
+  const account_type = await accountModel.getAccountTypes()
+
+  res.render("account/account_role_management",
+    {
+      title: "Account Role Management",
+      nav,
+      data,
+      account_firstname,
+      account_lastname,
+      account_email,
+      account_id,
+      account_type,
+      current_account_type,
+      errors: null,
+    }
+  )
+}
+
+accountCont.getuserData = async function (req, res, next) { 
+ const result = await accountModel.getAccountById(req.params.userId)
+ res.json(result)
 }
 
 module.exports = accountCont

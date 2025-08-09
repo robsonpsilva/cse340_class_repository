@@ -8,6 +8,3 @@ toggleBtn.addEventListener("click", () => {
   passwordInput.type = visible ? "text" : "password";
   toggleBtn.textContent = visible ? "Hide password" : "Show password";
 });
-
-
-

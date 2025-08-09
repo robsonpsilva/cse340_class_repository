@@ -86,8 +86,55 @@ async function getAccountById (account_id) {
       [account_id])
     return result.rows[0]
   } catch (error) {
-    return new Error("No matching clientwas found")
+    return new Error("No matching client was found")
   }
 }
 
-module.exports = {registerAccount, checkExistingEmail, getAccountByEmail, getAccountById, updateAccount, updatePass}
+/* *****************************
+* Return account data using email address
+* ***************************** */
+async function getFullAccountList () {
+  try {
+    const result = await pool.query(
+      'SELECT account_id, account_firstname, account_lastname, account_email, account_type FROM account')
+    return result.rows
+  } catch (error) {
+    return new Error("No matching user was found")
+  }
+}
+
+/* *****************************
+* Return account data using email address
+* ***************************** */
+async function getFullAccountList () {
+  try {
+    const result = await pool.query(
+      'SELECT account_id, account_firstname, account_lastname, account_email, account_type FROM account')
+    return result.rows
+  } catch (error) {
+    return new Error("No matching user was found")
+  }
+}
+
+async function getAccountTypes() {
+  try {
+    const sql = `
+      SELECT enumlabel AS type_name
+      FROM pg_enum
+      JOIN pg_type ON pg_type.oid = pg_enum.enumtypid
+      WHERE pg_type.typname = 'account_type'
+      ORDER BY enumsortorder;
+    `;
+    const result = await pool.query(sql);
+    
+    // Mapeia o resultado para um array simples de strings (ex: ['Client', 'Employee'])
+    const accountTypes = result.rows.map(row => row.type_name);
+    
+    return accountTypes;
+  } catch (error) {
+    console.error("getAccountTypes error: " + error);
+    return []; // Retorna um array vazio em caso de erro
+  }
+}
+
+module.exports = {registerAccount, checkExistingEmail, getAccountByEmail, getAccountById, updateAccount, updatePass, getFullAccountList, getAccountTypes}
