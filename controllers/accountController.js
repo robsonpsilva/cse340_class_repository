@@ -346,4 +346,13 @@ accountCont.getuserData = async function (req, res, next) {
  res.json(result)
 }
 
+accountCont.saveUserRole  = async function (req, res, next) { 
+  const account_type = req.body.account_type
+  const account_id = req.body.account_id
+  const result = await accountModel.updateAccountType(account_id, account_type)
+  if (result) {
+    console.log("sucess")
+  }
+}
+
 module.exports = accountCont

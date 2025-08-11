@@ -137,4 +137,46 @@ async function getAccountTypes() {
   }
 }
 
-module.exports = {registerAccount, checkExistingEmail, getAccountByEmail, getAccountById, updateAccount, updatePass, getFullAccountList, getAccountTypes}
+async function checkExistingAccountType(accountType) {
+  try {
+    const sql = `
+      SELECT EXISTS (
+        SELECT 1
+        FROM pg_enum
+        JOIN pg_type ON pg_type.oid = pg_enum.enumtypid
+        WHERE pg_type.typname = 'account_type' AND pg_enum.enumlabel = $1
+      );
+    `;
+    const result = await pool.query(sql, [accountType]);
+    
+    // O resultado da consulta `EXISTS` é um booleano (true/false)
+    return result.rows[0].exists;
+
+  } catch (error) {
+    console.error("checkExistingAccountType error: " + error);
+    return false; // Retorna false em caso de erro para indicar que não existe
+  }
+}
+
+/* *****************************
+ * Function to update a user's account type
+ * Parameters:
+ * - account_type: the new account type to be set
+ * - account_id: the ID of the user whose account type will be changed
+ * Returns:
+ * - A boolean indicating the success or failure of the operation
+ * ***************************** */
+async function updateAccountType(account_id, account_type) {
+  try {
+    const sql = "UPDATE account SET account_type = $1 WHERE account_id = $2 RETURNING *";
+    const result = await pool.query(sql, [account_type, account_id]);
+    
+    // Returns true if the operation affected at least one row
+    return result.rowCount > 0;
+  } catch (error) {
+    console.error("updateAccountType error: " + error);
+    return false; // Returns false in case of an error
+  }
+}
+
+module.exports = {registerAccount, checkExistingEmail, getAccountByEmail, getAccountById, updateAccount, updatePass, getFullAccountList, getAccountTypes, checkExistingAccountType, updateAccountType}

@@ -76,6 +76,8 @@ validate.loginRules = () => {
       .withMessage("Password does not meet requirements."),
   ]
 }
+
+
 /* ******************************
  * Check data and return errors or continue to registration
  * ***************************** */
@@ -212,5 +214,49 @@ validate.checkEditPassData = async (req, res, next) => {
   }
   next()
 }
+
+validate.roleRules  = () => {
+  return [ 
+    body("account_type")
+      .trim()
+      .custom(async (account_type) => {
+        const accountTypeExists = await accountModel.checkExistingAccountType(account_type)
+        if (!accountTypeExists){
+          throw new Error("Account type does not exists. Please enter a valid account type")
+        }
+      }),
+  ]
+}
+
+validate.checkRole = async (req, res, next) => {
+  let errors = []
+  errors = validationResult(req)
+  let data = await accountModel.getFullAccountList()
+  if (!errors.isEmpty()) {
+      let nav = await utilities.getNav()
+      const account_firstname = req.body.account_firstname 
+      const  account_lastname = req.body.account_lastname 
+      const account_id = req.body.account_id 
+      const account_email = req.body.account_email 
+      const account_type = await accountModel.getAccountTypes()
+      const current_account_type = req.body.account_type 
+      req.flash("error", "An error occurred while updating the account type.")
+      res.render("account/account_role_management", {
+        errors,
+        title: "Account Role Management",
+        nav,
+        data,
+        account_firstname,
+        account_lastname,
+        account_email,
+        account_id,
+        account_type, 
+        current_account_type, 
+      })
+      return
+  }
+  next()
+}
+
 
 module.exports = validate

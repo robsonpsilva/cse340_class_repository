@@ -45,4 +45,7 @@ router.get("/user_role/", Util.handleErrors(accountController.editAccountRole))
 
 router.get("/get-new-data/:userId", Util.handleErrors(accountController.getuserData))
 
+
+router.post("/admin", regValidate.roleRules(), regValidate.checkRole, Util.handleErrors(accountController.saveUserRole))
+
 module.exports = router;
