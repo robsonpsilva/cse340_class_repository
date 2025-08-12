@@ -347,12 +347,36 @@ accountCont.getuserData = async function (req, res, next) {
 }
 
 accountCont.saveUserRole  = async function (req, res, next) { 
-  const account_type = req.body.account_type
+  const nav = await utilities.getNav()
+  let data = await accountModel.getFullAccountList()
+  const current_account_type = req.body.account_type
   const account_id = req.body.account_id
-  const result = await accountModel.updateAccountType(account_id, account_type)
+  const account_firstname = req.body.account_firstname
+  const account_lastname = req.body.account_lastname
+  const account_email = req.body.account_email
+  const result = await accountModel.updateAccountType(account_id, current_account_type)
+  const account_type = await accountModel.getAccountTypes()
+  
   if (result) {
-    console.log("sucess")
+    req.flash("notice", "Account type updated successfully.") 
   }
+  else{
+    req.flash("error", "An error occurred while updating the account type.")
+  }
+  res.render("account/account_role_management",
+      {
+        title: "Account Role Management",
+        nav,
+        data,
+        account_firstname,
+        account_lastname,
+        account_email,
+        account_id,
+        account_type,
+        current_account_type,
+        errors: null,
+      }
+    )
 }
 
 module.exports = accountCont
